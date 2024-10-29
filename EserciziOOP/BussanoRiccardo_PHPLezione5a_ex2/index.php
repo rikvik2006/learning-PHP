@@ -9,6 +9,13 @@ declare(strict_types=1);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+        * {
+            font-family: "Inter", sans-serif;
+        }
+    </style>
 
     <title>Classe Libro</title>
 </head>
@@ -31,6 +38,7 @@ declare(strict_types=1);
             $this->set_numero_scaffale($numero_scaffale);
             $this->set_numero_pagine($numero_pagine);
             $this->set_casa_editrice($casa_editrice);
+            $this->set_copertina($copertina);
         }
 
         // Getters
@@ -142,28 +150,32 @@ declare(strict_types=1);
     ?>
 
     <div class="h-screen flex flex-row justify-center items-center">
-        <!-- Usando tailwind css crea una flex row con 3 libri che sotto ogni libro hanno i loro relativi dati, quindi Titolo, prezzo (prima dello sconto con una riga sopra), prezzo scontato del 10% rosso, numero scaffale, casa editrice, e  -->
-        img
-        <?php
-        $libro1 = new Libro("Il signore degli anelli", 20.50, 1, 500, "Mondadori", "https://imgur.com/eI3OKkX");
-        $libro2 = new Libro("Il signore degli anelli", 20.50, 1, 500, "Mondadori", "Copertina rigida");
-        $libro3 = new Libro("Il signore degli anelli", 20.50, 1, 500, "Mondadori", "Copertina rigida");
+        <div class="flex flex-row justify-center">
+            <?php
+            // Creiamo i 3 libri
+            $libro1 = new Libro("The Rust Programming Language", 20.50, 1, 500, "No Starch Press", "https://imgur.com/uHh20qj.png");
+            $libro2 = new Libro("Python Primi Passi", 5, 2, 275, "Independently published", "https://imgur.com/lQmYbaP.png");
+            $libro3 = new Libro("Every Day Go", 15, 3, 250, "Independently published", "https://imgur.com/8YujNfW.png");
 
-        $libri = [$libro1, $libro2, $libro3];
+            // Insertiamo i libri in un array
+            $libri = [$libro1, $libro2, $libro3];
 
-        foreach ($libri as $libro) {
-            echo "<div class='flex flex-col items-center justify-center bg-zinc-800 p-4 m-4 rounded-lg'>";
-            echo "<img src='" . $libro->get_copertina() . "' class='text-center'>";
-            echo "<h1 class='text-2xl text-center'>" . $libro->get_titolo() . "</h1>";
-            echo "<p class='text-center'>Prezzo: " . $libro->get_prezzo() . "</p>";
-            echo "<p class='text-center'>Prezzo scontato: <span class='text-red-500'>" . $libro->sconto_10_percento() . "</span></p>";
-            echo "<p class='text-center'>Numero Scaffale: " . $libro->get_numero_scaffale() . "</p>";
-            echo "<p class='text-center'>Numero Pagine: " . $libro->get_numero_pagine() . "</p>";
-            echo "<p class='text-center'>Casa Editrice: " . $libro->get_casa_editrice() . "</p>";
-            echo "</div>";
-        }
-
-        ?>
+            // Per ogni libro al intenro del array stapiamolo a schermo
+            foreach ($libri as $libro) {
+                echo "<div class='flex flex-col border rounded-lg border-stone-800 p-4 m-4 w-[350px] gap-4'>";
+                echo "<img class='w-full' src='" . $libro->get_copertina() . "'>";
+                echo "<h1 class='text-2xl text-center font-bold'>" . $libro->get_titolo() . "</h1>";
+                echo "<div class=''>";
+                echo "<p class='line-through'>Prezzo: " . $libro->get_prezzo() . "</p>";
+                echo "<p class='text-2xl'><span class='text-red-500'>" . $libro->sconto_10_percento() . " € -10%</span></p>";
+                echo "<p>Numero Scaffale: " . $libro->get_numero_scaffale() . "</p>";
+                echo "<p>Numero Pagine: " . $libro->get_numero_pagine() . "</p>";
+                echo "<p>Casa Editrice: " . $libro->get_casa_editrice() . "</p>";
+                echo "</div>";
+                echo "</div>";
+            }
+            ?>
+        </div>
 
     </div>
 </body>
