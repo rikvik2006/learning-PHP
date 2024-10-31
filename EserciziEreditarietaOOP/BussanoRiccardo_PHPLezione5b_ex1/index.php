@@ -91,11 +91,8 @@ declare(strict_types=1);
         </form>
         <div>
             <?php
-            if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["type"])) {
                 $type = validate_data($_GET["type"]);
-                if (empty($type)) {
-                    throw new Exception("Insert a valid type");
-                }
 
                 if ($type == "veicolo") {
                     echo $veicolo->accellera();
@@ -104,7 +101,8 @@ declare(strict_types=1);
                 } else if ($type == "moto") {
                     echo $moto->accellera();
                 } else {
-                    throw new Exception("Insert a type that exist");
+                    $render_error = "<div class='text-red-400'>Insert a valid type</div>";
+                    echo $render_error;
                 }
             }
             ?>
