@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            form {
+                width: 400px;
+                display: flex;
+                flex-direction: column;
+            }
+        </style>
+
+        <title>Cosa Form</title>
+    </head>
+    <body>
+        <form action="Cosa.php" method="post">
+            <label for="a">A (Altezza)</label>
+            <input
+                type="number"
+                id="a"
+                name="a"
+                placeholder="Inserisci l'altezza"
+            />
+            <label for="b">B (Base)</label>
+            <input
+                type="number"
+                id="b"
+                name="b"
+                placeholder="Inserisci la base"
+            />
+            <button type="submit">Invia dati</button>
+        </form>
+    </body>
+</html>
