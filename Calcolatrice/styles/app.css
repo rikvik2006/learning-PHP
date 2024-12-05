@@ -1,4 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --background-color: #212529;
+    --secodary-background: #343a40;
+    --primary-color: #495057;
+    --secondary-color: ;
+    --accent-color-1: #ffba08;
+    --accent-color-2: #faa307;
+    --accent-color-3: #f48c06;
+    --foreground-color: #f8f9fa;
+}
+
+/* Altri colori da provare */
+:root {
+    --background-color: #000000;
+    --secodary-background: #121212;
+    --accent-color-1: #eb004d;
+    --accent-color-2: #e99d01;
+    --foreground-color: #DCDCDC;
+}
+
+
 body {
-    background-color: #09090b;
-    color: #fafafa;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+    height: 100vh;
+    color: var(--foreground-color);
+}
+
+.calculator_container {
+    background-color: var(--secodary-background);
+}
+
+.btn {
+    width: 4rem;
+    height: 3rem;
+    color: var(--foreground-color);
+    background-color: var(--secodary-background);
 }
