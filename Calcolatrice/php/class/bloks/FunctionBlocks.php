@@ -81,9 +81,11 @@ class SinBlock extends FunctionBlock
 class PowerBlock extends FunctionBlock
 {
     private Block $base;
-    private block $exponent;
+    private Block $exponent;
     private string $functionValue = "";
 
+    // Blocks could be a number or a function block, or a Block group, or a combination of them
+    // But every will generate a valid math expression
     public function __construct(Block $base, Block $exponent)
     {
         parent::__construct("power", "<blockholder_base>**<blockholder_exponent>");
@@ -99,6 +101,7 @@ class PowerBlock extends FunctionBlock
     {
         $this->base = $base;
         $this->exponent = $exponent;
+        // Since every block has a getValue method, we can use it to get the value of the block
         $this->functionValue = str_replace("<blockholder_base>", (string)$base->getValue(), $this->getFunctionStringExpression());
         $this->functionValue = str_replace("<blockholder_exponent>", (string)$exponent->getValue(), $this->functionValue);
     }
