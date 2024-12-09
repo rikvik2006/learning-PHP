@@ -3,23 +3,28 @@
 declare(strict_types=1);
 
 
-class Block
+abstract class Block
 {
-    // String rappresetation of the value of the block
-    private string $value = "";
+    // The value that is stored inside the block
+    abstract public function getValue(): mixed;
 }
 
-class NumberBlock
+class NumberBlock extends Block
 {
     // The number that is stored insiede the class
     private float $number = 0;
 
-    public function getNumber(): float
+    public function __construct(float $number)
+    {
+        $this->setValue($number);
+    }
+
+    public function getValue(): float
     {
         return $this->number;
     }
 
-    public function setNumber(float $number): void
+    public function setValue(float $number): void
     {
         if (!is_numeric($number)) {
             throw new Exception("insert a valid number");
