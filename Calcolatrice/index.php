@@ -1,3 +1,6 @@
+<?php
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,14 +14,14 @@
 
 <body>
     <div class="calculator_back_background">
-        <div class="calculator_container">
-            <div class="screen_container">
+        <form class="calculator_container" action="./php/controller/calculatorController.php" method="post">
+            <section class="screen_container">
                 <input type="text" class="screen" value="0">
-            </div>
-            <div class="error_container">
-                <div>Ciao test</div>
-            </div>
-            <div class="keyboard_container">
+            </section>
+            <section class="error_container">
+                <div>Errors placeholder</div>
+            </section>
+            <section class="keyboard_container">
                 <div class="keypad function">
                     <button class="btn">a^2</button>
                     <button class="btn">b</button>
@@ -48,9 +51,9 @@
                     <button class="btn">-&gt;</button>
                     <button class="btn">&Sqrt;x</button>
                 </div>
-            </div>
-            <div class="design_bar_container"></div>
-        </div>
+            </section>
+            <section class="design_bar_container"></section>
+        </form>
     </div>
 
     <script>
