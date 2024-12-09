@@ -1,0 +1,12 @@
+{
+    "name": "scuola",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "browser-sync start --proxy \"localhost/scuola/Calcolatrice\" --files \"./Calcolatrice/**/*\""
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
