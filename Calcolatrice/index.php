@@ -16,7 +16,11 @@
     <div class="calculator_back_background">
         <form class="calculator_container" action="./php/controller/calculatorController.php" method="post">
             <section class="screen_container">
-                <input type="text" class="screen" value="0">
+                <div class="calculator_screen">
+                    <div class="expression">5 + 5</div>
+                    <div class="result">= 10</div>
+                </div>
+                <input id="invisible_calculator_screen" type="text" class="screen" value="0">
             </section>
             <section class="error_container">
                 <div>Errors placeholder</div>
