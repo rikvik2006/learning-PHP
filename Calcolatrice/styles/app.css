@@ -190,3 +190,7 @@ body {
     border: 2px solid blue; /* Evidenziazione del cursore */
     margin: -2px;
 }
+
+.power-exponent {
+    font-size: 1rem;
+}

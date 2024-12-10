@@ -27,22 +27,33 @@
 
 .sqrt-block {
     position: relative;
-    border-top: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    /* border-top: 1px solid black; */
+}
+
+.argument-custom-group {
+    display: flex;
+    flex-direction: row;
+    /* margin-left: 28px; */
+    margin-right: 10px;
 }
 
 .sqrt-block .index {
-    position: absolute;
-    top: -10px;
-    left: 0;
+    /* position: absolute; */
+    /* top: -5px; */
+    /* left: 0; */
     font-size: 0.5em;
+    text-align: left;
 }
 
 .sqrt-block .argument {
     font-size: 0.8em;
+    border-top: 1px solid white;
 }
 
 .sqrt-block .sqrt-image {
-    width: 10px;
+    width: 15px;
     height: 100%;
 }
 

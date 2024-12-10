@@ -20,7 +20,7 @@ class ScreenManager {
         this.screenContainer.innerHTML = this.getBlocksHTML(blocks);
 
         // Aggiorna il valore dell'input invisibile
-        const screenValue = blocks.map((block) => block.getValue()).join("");
+        const screenValue = blocks.map((block) => block.getValue()).join(";");
         this.invisibleScreen.value = screenValue || "0";
     }
 

@@ -4,7 +4,11 @@ import {
     OperatorBlock,
     SqrtBlock,
     SinBlock,
-    FunctionBlock,
+    Sqrt2Block,
+    CosBlock,
+    TanBlock,
+    PowerOf2,
+    PowerOfNBlock,
 } from "./blocks/Block.js";
 import { EmptyBlock } from "./blocks/EmptyBlock.js";
 import { Calculator } from "./Calculator.js";
@@ -27,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const screenManager = new ScreenManager();
 
     const buttons = document.querySelectorAll(".btn");
+    const form = document.querySelector("form.calculator_container");
 
     buttons.forEach((button) => {
         button.addEventListener("click", () => {
@@ -40,16 +45,28 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (blockType === "operator") {
                 block = new OperatorBlock(character);
             } else if (blockType === "sin") {
-                block = new SinBlock(new EmptyBlock()); // Puoi modificare il parametro iniziale
+                block = new SinBlock();
+            } else if (blockType === "cos") {
+                block = new CosBlock();
+            } else if (blockType === "tan") {
+                block = new TanBlock();
+            } else if (blockType === "nroot") {
+                block = new SqrtBlock();
             } else if (blockType === "sqrt") {
-                block = new SqrtBlock(new NumberBlock(""), new NumberBlock("")); // Placeholder
+                block = new Sqrt2Block();
+            } else if (blockType === "pow2") {
+                block = new PowerOf2();
+            } else if (blockType === "pow_n") {
+                block = new PowerOfNBlock();
             } else if (button.hasAttribute("data-clear")) {
                 calculator.blocks = []; // Svuota tutti i blocchi
                 block = null;
+            } else if (button.hasAttribute("data-backspace")) {
+                calculator.removeBlock(calculator.getLastBlock());
+                block = null;
             } else if (button.hasAttribute("data-equals")) {
-                // Logica per inviare al server
-                alert("Invio al server non ancora implementato!");
-                return;
+                // Invia il form
+                form.submit();
             }
 
             if (block) {
