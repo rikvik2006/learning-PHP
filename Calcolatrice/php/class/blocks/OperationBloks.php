@@ -21,7 +21,7 @@ class OperationBlock extends Block
 
     protected function setValue(string $operation): void
     {
-        if ($operation !== "+" && $operation !== "-" && $operation !== "*" && $operation !== "/") {
+        if ($operation !== "+" && $operation !== "-" && $operation !== "*" && $operation !== "/" && $operation !== "^") {
             throw new Exception("insert a valid operation");
         }
 
@@ -58,5 +58,13 @@ class DivisionBlock extends OperationBlock
     public function __construct()
     {
         parent::__construct("/");
+    }
+}
+
+class ExponentialBlock extends OperationBlock
+{
+    public function __construct()
+    {
+        parent::__construct("^");
     }
 }

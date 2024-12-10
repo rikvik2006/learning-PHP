@@ -26,10 +26,10 @@ abstract class FunctionBlock extends Block
         $this->functionName = $functionName;
     }
 
-    private function checkBlockHolderPlaceHolder(array $validBlockHolder): bool
+    private function checkBlockHolderPlaceHolder(string $functionStringExpression, array $validBlockHolder): bool
     {
         foreach ($validBlockHolder as $blockHolder) {
-            if (strpos($this->functionStringExpression, $blockHolder) !== false) {
+            if (strpos($functionStringExpression, $blockHolder) !== false) {
                 return true;
             }
         }
@@ -38,10 +38,11 @@ abstract class FunctionBlock extends Block
 
     public function setfunctionStringExpression(string $functionStringExpression): void
     {
-        if ($this->checkBlockHolderPlaceHolder(["<blockholder>", "<blockholder_base>", "<blockholder_exponent"])) {
+        // echo "⭐ Espressione con placeholder: " . $functionStringExpression . "<br>";
+        if ($this->checkBlockHolderPlaceHolder($functionStringExpression, ["<blockholder>", "<blockholder_base>", "<blockholder_exponent>"])) {
             $this->functionStringExpression = $functionStringExpression;
         } else {
-            throw new Exception("the function string expression doen't cotain at leas on placeholder <blockholder>");
+            throw new Exception("the function string expression doen't cotain at leas on placeholder [blockholder]");
         }
     }
 
@@ -63,6 +64,52 @@ class SinBlock extends FunctionBlock
     public function __construct(Block $argument)
     {
         parent::__construct("sin", "sin(<blockholder>)");
+        $this->setValue($argument);
+    }
+
+    public function getValue(): string
+    {
+        return $this->functionValue;
+    }
+
+    public function setValue(Block $argument): void
+    {
+        $this->argument = $argument;
+        $this->functionValue = str_replace("<blockholder>", (string)$argument->getValue(), $this->getFunctionStringExpression());
+    }
+}
+
+class CosBlock extends FunctionBlock
+{
+    private Block $argument;
+    private string $functionValue = "";
+
+    public function __construct(Block $argument)
+    {
+        parent::__construct("cos", "cos(<blockholder>)");
+        $this->setValue($argument);
+    }
+
+    public function getValue(): string
+    {
+        return $this->functionValue;
+    }
+
+    public function setValue(Block $argument): void
+    {
+        $this->argument = $argument;
+        $this->functionValue = str_replace("<blockholder>", (string)$argument->getValue(), $this->getFunctionStringExpression());
+    }
+}
+
+class TanBlock extends FunctionBlock
+{
+    private Block $argument;
+    private string $functionValue = "";
+
+    public function __construct(Block $argument)
+    {
+        parent::__construct("tag", "tan(<blockholder>)");
         $this->setValue($argument);
     }
 

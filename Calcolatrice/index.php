@@ -1,4 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
+session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -21,16 +26,20 @@
                     <div class="expression"></div>
                     <div class="result">= 10</div>
                 </div>
-                <input id="invisible_calculator_screen" type="text" class="screen" value="0">
+                <input id="invisible_calculator_screen" name="expression" type="text" class="screen" value="0">
             </section>
             <section class="error_container">
                 <div>Errors placeholder</div>
             </section>
             <section class="keyboard_container">
                 <div class="keypad function">
-                    <button type="button" class="btn" data-type="power">power</button>
-                    <button type="button" class="btn" data-type="sin">sin</button>
-                    <button type="button" class="btn" data-type="sqrt">sqrt</button>
+                    <button type="button" class="btn" data-type="pow2">X^2</button>
+                    <button type="button" class="btn" data-type="pow_n">X^N</button>
+                    <button type="button" class="btn" data-type="sqrt">SQRT</button>
+                    <button type="button" class="btn" data-type="nroot">N_ROOT</button>
+                    <button type="button" class="btn" data-type="sin">SIN</button>
+                    <button type="button" class="btn" data-type="cos">COS</button>
+                    <button type="button" class="btn" data-type="tan">TAN</button>
                 </div>
                 <div class="keypad numbers">
                     <button type="button" class="btn" data-type="number" data-character="1">1</button>
@@ -47,6 +56,7 @@
                     <button type="button" class="btn" data-type="operator" data-character="/">/</button>
                     <button type="button" class="btn" data-type="number" data-character="0">0</button>
                     <button type="button" class="btn" data-clear>C</button>
+                    <button type="button" class="btn" data-backspace>BC</button>
                     <button type="button" class="btn" data-type="operator" data-character="*">*</button>
                 </div>
                 <div class="keypad control">
