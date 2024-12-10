@@ -5,7 +5,11 @@ declare(strict_types=1);
 
 abstract class Block
 {
-    // The value that is stored inside the block
+    //The value that is stored inside the block
+    /**
+     * Return a mixed value that rappresent the block in a mathematical way that PHP can evaluate
+     * @return mixed
+     */
     abstract public function getValue(): mixed;
 }
 

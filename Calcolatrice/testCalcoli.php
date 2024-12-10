@@ -11,3 +11,6 @@ echo "Coseno: " . cos(pi() / 2) . "<br>";         // Coseno di pigrego mezzi
 
 // Fattoriale
 echo "Fattoriale: " . fact(4)  . "<br>";
+
+?>
+<div contenteditable="true">Ciao</div>

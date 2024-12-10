@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="./styles/app.css">
+    <link rel="stylesheet" href="./styles/blocks.css">
     <title>Calcolatrice</title>
 </head>
 
@@ -17,7 +18,7 @@
         <form class="calculator_container" action="./php/controller/calculatorController.php" method="post">
             <section class="screen_container">
                 <div class="calculator_screen">
-                    <div class="expression">5 + 5</div>
+                    <div class="expression"></div>
                     <div class="result">= 10</div>
                 </div>
                 <input id="invisible_calculator_screen" type="text" class="screen" value="0">
@@ -27,33 +28,31 @@
             </section>
             <section class="keyboard_container">
                 <div class="keypad function">
-                    <button class="btn">a^2</button>
-                    <button class="btn">b</button>
-                    <button class="btn">c</button>
+                    <button type="button" class="btn" data-type="power">power</button>
+                    <button type="button" class="btn" data-type="sin">sin</button>
+                    <button type="button" class="btn" data-type="sqrt">sqrt</button>
                 </div>
                 <div class="keypad numbers">
-                    <button class="btn">1</button>
-                    <button class="btn">2</button>
-                    <button class="btn">3</button>
-                    <button class="btn">+</button>
-                    <button class="btn">4</button>
-                    <button class="btn">5</button>
-                    <button class="btn">6</button>
-                    <button class="btn">-</button>
-                    <button class="btn">7</button>
-                    <button class="btn">8</button>
-                    <button class="btn">9</button>
-                    <button class="btn">/</button>
-                    <button class="btn">0</button>
-                    <button class="btn">C</button>
-                    <button class="btn">=</button>
-                    <button class="btn">*</button>
+                    <button type="button" class="btn" data-type="number" data-character="1">1</button>
+                    <button type="button" class="btn" data-type="number" data-character="2">2</button>
+                    <button type="button" class="btn" data-type="number" data-character="3">3</button>
+                    <button type="button" class="btn" data-type="operator" data-character="+">+</button>
+                    <button type="button" class="btn" data-type="number" data-character="4">4</button>
+                    <button type="button" class="btn" data-type="number" data-character="5">5</button>
+                    <button type="button" class="btn" data-type="number" data-character="6">6</button>
+                    <button type="button" class="btn" data-type="operator" data-character="-">-</button>
+                    <button type="button" class="btn" data-type="number" data-character="7">7</button>
+                    <button type="button" class="btn" data-type="number" data-character="8 ">8</button>
+                    <button type="button" class="btn" data-type="number" data-character="9">9</button>
+                    <button type="button" class="btn" data-type="operator" data-character="/">/</button>
+                    <button type="button" class="btn" data-type="number" data-character="0">0</button>
+                    <button type="button" class="btn" data-clear>C</button>
+                    <button type="button" class="btn" data-type="operator" data-character="*">*</button>
                 </div>
                 <div class="keypad control">
-                    <button class="btn">=</button>
-                    <button class="btn">&lt;-</button>
-                    <button class="btn">-&gt;</button>
-                    <button class="btn">&Sqrt;x</button>
+                    <button type="button" class="btn">&lt;-</button>
+                    <button type="button" class="btn">-&gt;</button>
+                    <button type="button" class="btn equals" data-equals>=</button>
                 </div>
             </section>
             <section class="design_bar_container"></section>
@@ -75,6 +74,8 @@
         // Chiama la funzione con il numero di pallini desiderato
         // generateDots(100);
     </script>
+    <script src="./javascript/blocks/Block.js" type="module"></script>
+    <script src="./javascript/buttonClick.js" type="module"></script>
 </body>
 
 </html>
