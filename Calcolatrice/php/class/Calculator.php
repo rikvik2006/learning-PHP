@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once "./Memory.php";
+
 class Calculator
 {
     private BlocksManager $blocksManager;

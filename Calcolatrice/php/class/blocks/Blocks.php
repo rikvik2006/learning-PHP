@@ -37,3 +37,14 @@ class NumberBlock extends Block
         $this->number = $number;
     }
 }
+
+class DecimalPointBlock extends Block
+{
+    // The number that is stored insiede the class
+    private string $decimalPoint = ".";
+
+    public function getValue(): string
+    {
+        return $this->decimalPoint;
+    }
+}

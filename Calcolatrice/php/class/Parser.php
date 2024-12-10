@@ -40,6 +40,8 @@ class Parser
                 } elseif ($block == "/") {
                     $objectBlocks[] = new DivisionBlock();
                 }
+            } elseif ($block == ".") {
+                $objectBlocks[] = new DecimalPointBlock();
             } elseif (preg_match('/^\\\\sqrt\\[[0-9]+\\]{[0-9]+}$/', $block)) {
                 // RADICE ENNESIMA
 
@@ -60,19 +62,33 @@ class Parser
                 $powerExponent = (float)substr($block, $exponentIndex, -1);
 
                 $objectBlocks[] = new PowerBlock(new NumberBlock($powerBase), new NumberBlock($powerExponent));
-            } elseif (preg_match('/^\\\\sin{[0-9]+}$/', $block)) {
+            } elseif (preg_match('/^\\\\sin{-?[0-9]+}$/', $block)) {
                 // SENO
                 $sinArgument = (float)substr($block, 5, -1);
-                $radiantSinArgument = deg2rad($sinArgument);
+
+                // Manage negative angles
+                $normalizedAngle = $sinArgument % 360;
+                if ($normalizedAngle < 0) {
+                    $normalizedAngle += 360;
+                }
+                $normalizedAngle;
+
+                $radiantSinArgument = deg2rad($normalizedAngle);
 
                 $objectBlocks[] = new SinBlock(new NumberBlock($radiantSinArgument));
-            } elseif (preg_match('/^\\\\cos{[0-9]+}$/', $block)) {
+            } elseif (preg_match('/^\\\\cos{-?[0-9]+}$/', $block)) {
                 // COSENO
                 $cosArgument = (float)substr($block, 5, -1);
-                $radiantCosArgument = deg2rad($cosArgument);
 
+                $normalizedAngle = $cosArgument % 360;
+                if ($normalizedAngle < 0) {
+                    $normalizedAngle += 360;
+                }
+                $normalizedAngle;
+
+                $radiantCosArgument = deg2rad($normalizedAngle);
                 $objectBlocks[] = new CosBlock(new NumberBlock($radiantCosArgument));
-            } elseif (preg_match('/^\\\\tan{[0-9]+}$/', $block)) {
+            } elseif (preg_match('/^\\\\tan{-?[0-9]+}$/', $block)) {
                 // TANGENTE
                 $tanArgument = (float)substr($block, 5, -1);
 
@@ -80,6 +96,12 @@ class Parser
                 if ($tanArgument % 90 == 0) {
                     throw new Exception("Impossibile calcolare la tangente di un angolo multiplo di 90 non è definito");
                 }
+
+                $normalizedAngle = $tanArgument % 360;
+                if ($normalizedAngle < 0) {
+                    $normalizedAngle += 360;
+                }
+                $normalizedAngle;
 
                 $radiantTanArgument = deg2rad($tanArgument);
 
@@ -117,7 +139,7 @@ class Parser
         $expression = "";
 
         foreach ($blocks as $block) {
-            $expression .= $block->getValue() . " ";
+            $expression .= $block->getValue() . "";
         }
 
         return $expression;
@@ -133,11 +155,11 @@ class Parser
         // check if there are more than on operator in a row
         for ($i = 0; $i < count($blocks) - 1; $i++) {
             if (in_array($blocks[$i], ['+', '-', '*', '/']) && in_array($blocks[$i + 1], ['+', '-', '*', '/'])) {
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     /**
@@ -146,7 +168,6 @@ class Parser
     public static function evaluate(string $phpExpression): float
     {
         $result = eval("return $phpExpression;");
-
         return $result;
     }
 }

@@ -2,7 +2,41 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . DIRECTORY_SEPARATOR . "./php/class/Memory.php";
 session_start();
+$memory = Memory::create();
+
+function getFrontEndExpression()
+{
+    if (!isset($_SESSION['frontEndExpression'])) {
+        return '0';
+    }
+
+    $frontEndExpression = $_SESSION['frontEndExpression'];
+
+    $_SESSION['frontEndExpression'] = "0";
+
+    return $frontEndExpression;
+}
+
+function getError()
+{
+    if (!isset($_SESSION['error'])) {
+        return 'Schermo Errori';
+    }
+
+    $error = $_SESSION['error'];
+
+    $_SESSION['error'] = 'Schermo Errori';
+
+    return $error;
+}
+
+
+if (!isset($_SESSION['result'])) {
+    $_SESSION['result'] = '';
+}
+
 
 ?>
 
@@ -23,13 +57,21 @@ session_start();
         <form class="calculator_container" action="./php/controller/calculatorController.php" method="post">
             <section class="screen_container">
                 <div class="calculator_screen">
-                    <div class="expression"></div>
-                    <div class="result">= 10</div>
+                    <div class="expression">0</div>
+                    <?php if ($_SESSION['result'] !== null): ?>
+                        <div class="result">
+                            = <?= htmlspecialchars((string)$_SESSION['result']); ?>
+                        </div>
+                        <?php
+                        $_SESSION['result'] = '';
+                        ?>
+                    <?php endif; ?>
                 </div>
-                <input id="invisible_calculator_screen" name="expression" type="text" class="screen" value="0">
+                <input id="invisible_calculator_screen" name="expression" type="text" class="screen" value="<?= getFrontEndExpression() ?>">
+                <input id="invisible_store_screen" name="sto" type="text" class="screen" value="false">
             </section>
             <section class="error_container">
-                <div>Errors placeholder</div>
+                <div class="error"><?= getError() ?></div>
             </section>
             <section class="keyboard_container">
                 <div class="keypad function">
@@ -40,6 +82,7 @@ session_start();
                     <button type="button" class="btn" data-type="sin">SIN</button>
                     <button type="button" class="btn" data-type="cos">COS</button>
                     <button type="button" class="btn" data-type="tan">TAN</button>
+                    <button type="button" class="btn" data-type="fact">!</button>
                 </div>
                 <div class="keypad numbers">
                     <button type="button" class="btn" data-type="number" data-character="1">1</button>
@@ -60,12 +103,19 @@ session_start();
                     <button type="button" class="btn" data-type="operator" data-character="*">*</button>
                 </div>
                 <div class="keypad control">
-                    <button type="button" class="btn">&lt;-</button>
-                    <button type="button" class="btn">-&gt;</button>
+                    <button type="button" class="btn" data-mem>MEM</button>
+                    <button type="button" class="btn" data-sto>STO</button>
+                    <button type="button" class="btn" data-memplus>M+</button>
+                    <button type="button" class="btn" data-type="decimal" data-character=".">.</button>
                     <button type="button" class="btn equals" data-equals>=</button>
                 </div>
             </section>
-            <section class="design_bar_container"></section>
+            <section class="memory_container">
+                <?php if ($memory->getMemory() != 0): ?>
+                    <div class="result">M</div>
+                    <div><?= $memory->getMemory() ?></div>
+                <?php endif; ?>
+            </section>
         </form>
     </div>
 

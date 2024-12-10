@@ -190,31 +190,49 @@ class FunctionBlock extends Block {
  * @property {Block} __argument
  */
 class SqrtBlock extends FunctionBlock {
-    constructor() {
-        const sqrtIcon = `${window.location.pathname}public/sqrt_image.svg`;
+    constructor(index, argument) {
+        const baseUrl =
+            window.location.origin +
+            window.location.pathname.replace(/\/index\.php$/, "");
+        const sqrtIcon = `${baseUrl}/public/sqrt_image.svg`;
         super(sqrtIcon);
         this.block.classList.add("sqrt-block");
 
-        const indexValue = this.getIndexWithPrompt();
-        const groupIndex = indexValue.split("/");
-        let index;
-        if (groupIndex.length > 1) {
-            index = new GroupBlock([
-                new NumberBlock(groupIndex[0]),
-                new OperatorBlock("/"),
-                new NumberBlock(groupIndex[1]),
-            ]);
+        if (index === undefined || argument === undefined) {
+            const indexValue = this.getIndexWithPrompt();
+            const groupIndex = indexValue.split("/");
+            let index;
+            if (groupIndex.length > 1) {
+                index = new GroupBlock([
+                    new NumberBlock(groupIndex[0]),
+                    new OperatorBlock("/"),
+                    new NumberBlock(groupIndex[1]),
+                ]);
+            } else {
+                index = new NumberBlock(indexValue);
+            }
+
+            const argumentValue = this.getArgumentWithPrompt();
+            const argument = new NumberBlock(argumentValue);
+            this.setIndex(index);
+            this.setArgument(argument);
+            this.addSubBlock(index);
+            this.addSubBlock(argument);
         } else {
-            index = new NumberBlock(indexValue);
+            if (!(index instanceof Block)) {
+                throw new TypeError("Index must be an instance of Block");
+            }
+
+            if (!(argument instanceof Block)) {
+                throw new TypeError("Argument must be an instance of Block");
+            }
+
+            this.setIndex(index);
+            this.setArgument(argument);
+            this.addSubBlock(index);
+            this.addSubBlock(argument);
         }
 
-        const argumentValue = this.getArgumentWithPrompt();
-        const argument = new NumberBlock(argumentValue);
-
-        this.setIndex(index);
-        this.setArgument(argument);
-        this.addSubBlock(index);
-        this.addSubBlock(argument);
         this.updateBlockElement();
     }
 
@@ -288,26 +306,44 @@ class SqrtBlock extends FunctionBlock {
 }
 
 class Sqrt2Block extends FunctionBlock {
-    constructor() {
-        const sqrtIcon = `${window.location.pathname}public/sqrt_image.svg`;
+    constructor(argument) {
+        const baseUrl =
+            window.location.origin +
+            window.location.pathname.replace(/\/index\.php$/, "");
+        const sqrtIcon = `${baseUrl}/public/sqrt_image.svg`;
         super(sqrtIcon);
         this.block.classList.add("sqrt-block");
 
         let index = new NumberBlock("2");
 
-        const argumentValue = this.getArgumentWithPrompt();
-        const argument = new NumberBlock(argumentValue);
+        if (argument === undefined) {
+            const argumentValue = this.getArgumentWithPrompt();
+            const argument = new NumberBlock(argumentValue);
+
+            this.setArgument(argument);
+            this.addSubBlock(argument);
+        } else {
+            if (!(argument instanceof Block)) {
+                throw new TypeError("Argument must be an instance of Block");
+            }
+
+            this.setArgument(argument);
+            this.addSubBlock(argument);
+        }
 
         this.setIndex(index);
-        this.setArgument(argument);
         this.addSubBlock(index);
-        this.addSubBlock(argument);
         this.updateBlockElement();
     }
 
     getArgumentWithPrompt() {
         let argument = prompt("Inserisci l'argomento della radice quadrata");
-        while (isNaN(argument) || argument === null || argument === "") {
+        while (
+            isNaN(argument) ||
+            argument === null ||
+            argument === "" ||
+            argument < 0
+        ) {
             argument = prompt(
                 "Inserisci un numero valido per l'argomento della radice quadrata"
             );
@@ -363,16 +399,25 @@ class Sqrt2Block extends FunctionBlock {
 }
 
 class SinBlock extends FunctionBlock {
-    constructor() {
+    constructor(argument) {
         super("sin");
         this.block.classList.add("sin-block");
 
-        const argumentValue = this.getArgumentWithPrompt();
-        const argument = new NumberBlock(argumentValue);
-
         this.block.innerText = `${this.character}(`;
-        this.setArgument(argument);
-        this.addSubBlock(argument);
+        if (argument === undefined) {
+            const argumentValue = this.getArgumentWithPrompt();
+            const argument = new NumberBlock(argumentValue);
+            this.setArgument(argument);
+            this.addSubBlock(argument);
+        } else {
+            if (!(argument instanceof Block)) {
+                throw new TypeError("Argument must be an instance of Block");
+            }
+
+            this.setArgument(argument);
+            this.addSubBlock(argument);
+        }
+
         this.updateBlockElement();
         this.block.innerHTML += ")";
     }
@@ -409,16 +454,25 @@ class SinBlock extends FunctionBlock {
 }
 
 class CosBlock extends FunctionBlock {
-    constructor() {
+    constructor(argument) {
         super("cos");
         this.block.classList.add("cos-block");
 
-        const argumentValue = this.getArgumentWithPrompt();
-        const argument = new NumberBlock(argumentValue);
-
         this.block.innerText = `${this.character}(`;
-        this.setArgument(argument);
-        this.addSubBlock(argument);
+        if (argument === undefined) {
+            const argumentValue = this.getArgumentWithPrompt();
+            const argument = new NumberBlock(argumentValue);
+            this.setArgument(argument);
+            this.addSubBlock(argument);
+        } else {
+            if (!(argument instanceof Block)) {
+                throw new TypeError("Argument must be an instance of Block");
+            }
+
+            this.setArgument(argument);
+            this.addSubBlock(argument);
+        }
+
         this.updateBlockElement();
         this.block.innerHTML += ")";
     }
@@ -455,16 +509,26 @@ class CosBlock extends FunctionBlock {
 }
 
 class TanBlock extends FunctionBlock {
-    constructor() {
+    constructor(argument) {
         super("tan");
         this.block.classList.add("tan-block");
 
-        const argumentValue = this.getArgumentWithPrompt();
-        const argument = new NumberBlock(argumentValue);
-
         this.block.innerText = `${this.character}(`;
-        this.setArgument(argument);
-        this.addSubBlock(argument);
+
+        if (argument === undefined) {
+            const argumentValue = this.getArgumentWithPrompt();
+            const argument = new NumberBlock(argumentValue);
+            this.setArgument(argument);
+            this.addSubBlock(argument);
+        } else {
+            if (!(argument instanceof Block)) {
+                throw new TypeError("Argument must be an instance of Block");
+            }
+
+            this.setArgument(argument);
+            this.addSubBlock(argument);
+        }
+
         this.updateBlockElement();
         this.block.innerHTML += ")";
     }
@@ -501,18 +565,31 @@ class TanBlock extends FunctionBlock {
 }
 
 class PowerOfNBlock extends Block {
-    constructor() {
+    constructor(base, exponent) {
         super("pow");
         this.block.classList.add("pow-block");
 
-        const baseValue = this.getBaseWithPrompt();
-        const base = new NumberBlock(baseValue);
+        if (base === undefined || exponent === undefined) {
+            const baseValue = this.getBaseWithPrompt();
+            const base = new NumberBlock(baseValue);
+            const exponentValue = this.getExponentWithPrompt();
+            const exponent = new NumberBlock(exponentValue);
 
-        const exponentValue = this.getExponentWithPrompt();
-        const exponent = new NumberBlock(exponentValue);
+            this.setBase(base);
+            this.setExponent(exponent);
+        } else {
+            if (!(base instanceof Block)) {
+                throw new TypeError("Base must be an instance of Block");
+            }
 
-        this.setBase(base);
-        this.setExponent(exponent);
+            if (!(exponent instanceof Block)) {
+                throw new TypeError("Exponent must be an instance of Block");
+            }
+
+            this.setBase(base);
+            this.setExponent(exponent);
+        }
+
         this.updateBlockElement();
     }
 
@@ -604,7 +681,63 @@ class PowerOf2 extends Block {
     }
 
     getValue() {
-        return `${this.base.getValue()}^${this.exponent.getValue()}`;
+        return `${this.base.getValue()}^{${this.exponent.getValue()}}`;
+    }
+}
+
+class FactorialBlock extends Block {
+    constructor(base) {
+        super("fact");
+        this.block.classList.add("fact-block");
+
+        if (base === undefined) {
+            const baseValue = this.getBaseWithPrompt();
+            const base = new NumberBlock(baseValue);
+
+            this.setBase(base);
+        } else {
+            if (!(base instanceof Block)) {
+                throw new TypeError("Base must be an instance of Block");
+            }
+
+            this.setBase(base);
+        }
+
+        this.updateBlockElement();
+    }
+
+    getBaseWithPrompt() {
+        let base = prompt("Inserisci la l'argomento del fattoriale");
+        while (
+            isNaN(base) ||
+            base === null ||
+            base === "" ||
+            base < 0 ||
+            base % 1 !== 0
+        ) {
+            base = prompt(
+                "Inserisci un numero valido per l'argomento del fattoriale maggiore di zero, e non razionale"
+            );
+        }
+
+        return base;
+    }
+
+    setBase(base) {
+        if (!(base instanceof Block)) {
+            throw new TypeError("Base must be an instance of Block");
+        }
+
+        this.base = base;
+    }
+
+    updateBlockElement() {
+        this.block.innerHTML = `${this.base.block.outerHTML}!`;
+        this.base.block.classList.add("base");
+    }
+
+    getValue() {
+        return `\\fact{${this.base.getValue()}}`;
     }
 }
 
@@ -620,6 +753,7 @@ export {
     TanBlock,
     PowerOfNBlock,
     PowerOf2,
+    FactorialBlock,
 };
 
 // README: Continua con la crezione del blocco SQRT inserendo l'indece e l'argomento, renderizzando l'immagine e mettodo il bordo al altezza giusta

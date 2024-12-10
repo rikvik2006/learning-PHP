@@ -155,12 +155,18 @@ body {
 }
 
 .calculator_screen .result {
+    font-family: "Abhaya Libre", serif;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    min-height: 50px;
+    overflow-x: auto;
     white-space: nowrap;
 }
 
-/* .calculator_screen .expression {
-    text-align: left;
-} */
+.calculator_screen .expression {
+    font-family: "Abhaya Libre", serif;
+}
 
 .dot {
     width: 2px;

@@ -6,7 +6,6 @@ class Calculator {
         this.blocks = [
             // new SqrtBlock(new NumberBlock("4"), new NumberBlock("16")),
         ];
-        // this.cursorIndex = 0;
     }
 
     getBlocks() {

@@ -9,9 +9,12 @@ import {
     TanBlock,
     PowerOf2,
     PowerOfNBlock,
+    FactorialBlock,
 } from "./blocks/Block.js";
 import { EmptyBlock } from "./blocks/EmptyBlock.js";
 import { Calculator } from "./Calculator.js";
+import { ErrorScreenManager } from "./ErrorScreenManager.js";
+import { FrontEndParser } from "./FrontEndParser.js";
 import { ScreenManager } from "./ScreenManager.js";
 
 /**
@@ -24,6 +27,24 @@ function addBlockToInput(block) {
     screen.value = currentValue + block.getValue();
 }
 
+function validateAdiacentOperators($expressionString) {
+    console.log("⭐ validando");
+    const baseUrl =
+        window.location.origin +
+        window.location.pathname.replace(/\/index\.php$/, "");
+    const url = new URL(
+        baseUrl + "/php/controller/validateOperatorController.php"
+    );
+
+    console.log("🔢", url);
+
+    return fetch(url, {
+        method: "POST",
+        //send expresssion string as urlencoded form data
+        body: new URLSearchParams({ expression: $expressionString }),
+    });
+}
+
 export const calculator = new Calculator();
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -32,6 +53,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const buttons = document.querySelectorAll(".btn");
     const form = document.querySelector("form.calculator_container");
+    const storeInput = document.getElementById("invisible_store_screen");
+    const invisibileScreen = document.getElementById(
+        "invisible_calculator_screen"
+    );
+
+    console.log("🔢", invisibileScreen.value);
+
+    FrontEndParser.parseInput(invisibileScreen.value).forEach((block) => {
+        console.log("⭐", block);
+
+        calculator.addBlock(block);
+
+        // Aggiorna lo schermo
+        screenManager.updateScreen(calculator.getBlocks());
+    });
 
     buttons.forEach((button) => {
         button.addEventListener("click", () => {
@@ -44,6 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 block = new NumberBlock(character);
             } else if (blockType === "operator") {
                 block = new OperatorBlock(character);
+            } else if (blockType === "decimal") {
+                block = new NumberBlock(character);
             } else if (blockType === "sin") {
                 block = new SinBlock();
             } else if (blockType === "cos") {
@@ -58,6 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 block = new PowerOf2();
             } else if (blockType === "pow_n") {
                 block = new PowerOfNBlock();
+            } else if (blockType === "fact") {
+                block = new FactorialBlock();
             } else if (button.hasAttribute("data-clear")) {
                 calculator.blocks = []; // Svuota tutti i blocchi
                 block = null;
@@ -67,6 +107,15 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (button.hasAttribute("data-equals")) {
                 // Invia il form
                 form.submit();
+            } else if (button.hasAttribute("data-sto")) {
+                storeInput.value = "store";
+                form.submit();
+            } else if (button.hasAttribute("data-memplus")) {
+                storeInput.value = "memplus";
+                form.submit();
+            } else if (button.hasAttribute("data-mem")) {
+                storeInput.value = "recall";
+                form.submit();
             }
 
             if (block) {
@@ -74,9 +123,24 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             // Aggiorna lo schermo
-
             console.log("💀", calculator.getBlocks());
             screenManager.updateScreen(calculator.getBlocks());
+            validateAdiacentOperators(
+                calculator
+                    .getBlocks()
+                    .map((block) => block.getValue())
+                    .join(";")
+            )
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.error) {
+                        console.error(data.error);
+                        // calculator.removeBlock(calculator.getLastBlock());
+                        ErrorScreenManager.updateError(data.error);
+                    } else if (data.status == "ok") {
+                        ErrorScreenManager.updateError("Schermo Errori");
+                    }
+                });
         });
     });
 
