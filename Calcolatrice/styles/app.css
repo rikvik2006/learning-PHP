@@ -42,6 +42,14 @@ body {
     color: var(--foreground-color);
 }
 
+#invisible_calculator_screen {
+    display: none;
+}
+
+#invisible_store_screen {
+    display: none;
+}
+
 .calculator_back_background {
     background-color: var(--back-background-color);
     border: 4px solid var(--border);

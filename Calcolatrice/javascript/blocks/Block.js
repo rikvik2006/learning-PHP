@@ -537,7 +537,12 @@ class TanBlock extends FunctionBlock {
         let argument = prompt(
             "Inserisci l'argomento della funzione tangente (in gradi)"
         );
-        while (isNaN(argument) || argument === null || argument === "") {
+        while (
+            isNaN(argument) ||
+            argument === null ||
+            argument === "" ||
+            argument % 90 === 0
+        ) {
             argument = prompt(
                 "Inserisci un numero valido per l'argomento della funzione tangente (in gradi)"
             );
