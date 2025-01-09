@@ -1,6 +1,23 @@
 body {
-    background-color: #f0f0f0;
+    background-color: #09090b;
+    color: #e2e2e2;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    gap: 1rem;
+}
+
+form .inputContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.errorContainer {
+    color: red;
 }
