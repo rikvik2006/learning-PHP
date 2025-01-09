@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Funzionalità 1 - Filtro Rappresentanti</title>
+
+        <link rel="stylesheet" href="./style/style.css" />
+    </head>
+    <body>
+        <div class="formContainer">
+            <form method="get" action="./results.php">
+                <div class="inputContainer">
+                    <label for="minSales">Min Fatturato</label>
+                    <!-- The id "minSales" is used for the label of the input, instead the name attribute minSales is used as the query parameter for the get request, same for the other input -->
+                    <input
+                        type="number"
+                        id="minSales"
+                        name="minSales"
+                        required
+                    />
+                </div>
+                <div class="inputContainer">
+                    <label for="maxSales">Max Fatturato</label>
+                    <input
+                        type="number"
+                        id="maxSales"
+                        name="maxSales"
+                        required
+                    />
+                </div>
+                <button type="submit">Filtra</button>
+            </form>
+        </div>
+        <div>
+            <a href="./index.html">Home page</a>
+        </div>
+    </body>
+</html>

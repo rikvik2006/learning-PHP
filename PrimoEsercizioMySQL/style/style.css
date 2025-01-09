@@ -1,5 +1,10 @@
+:root {
+    --primary-background: #09090b;
+    --secondary-background: #18181a;
+}
+
 body {
-    background-color: #09090b;
+    background-color: var(--secondary-background);
     color: #e2e2e2;
     font-family: Arial, sans-serif;
     margin: 0;
@@ -20,4 +25,12 @@ form .inputContainer {
 
 .errorContainer {
     color: red;
+}
+
+.pageContainer {
+    height: 100vh;
+}
+
+.sideBar {
+    height: 100vh;
 }
