@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "browser-sync start --proxy \"localhost/scuola/Calcolatrice\" --files \"./Calcolatrice/**/*\""
+        "dev": "browser-sync start --proxy \"localhost\" --files \"./\""
     },
     "keywords": [],
     "author": "",
