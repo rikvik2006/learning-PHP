@@ -25,7 +25,7 @@ function display_row(array $row)
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] != "GET") {
-    header("Location: ../filtroRappresentanti.html");
+    header("Location: ./index.html");
     exit;
 }
 
@@ -34,7 +34,7 @@ $minSales = sanitize_input($_GET["minSales"]);
 $maxSales = sanitize_input($_GET["maxSales"]);
 
 if (!isset($minSales) || !isset($maxSales)) {
-    header("Location: ../filtroRappresentanti.html");
+    header("Location: ./index.html");
     exit;
 }
 // } else {
@@ -113,7 +113,7 @@ if (!is_numeric($minSales) || !is_numeric($maxSales)) {
         </table>
     <?php endif; ?>
     <div>
-        <a href="../filtroRappresentanti.html">Indietro</a>
+        <a href="./index.html">Indietro</a>
         <a href="../index.html">Home page</a>
     </div>
 </body>
