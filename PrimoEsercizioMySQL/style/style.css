@@ -97,6 +97,8 @@ form .inputContainer {
     display: flex;
     flex-direction: row;
     padding: 0.5rem;
+    /* margin: 0.5rem; */
+    gap: 0.5rem;
 }
 
 .sideBar {
@@ -105,7 +107,8 @@ form .inputContainer {
     width: 15rem;
     display: flex;
     flex-direction: column;
-    padding: 0.5rem;
+    /* padding: 0.5rem; */
+    gap: 1rem;
 }
 
 a {
@@ -137,7 +140,81 @@ a {
 
 .mainContent {
     background-color: hsl(var(--background));
+    /* background-color: bisque; */
     height: 100%;
     width: 100%;
     border-radius: var(--radius);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.sideBar .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    padding: 0.7rem 1rem;
+    background-color: hsl(var(--input));
+    border-radius: var(--radius);
+}
+
+.sideBar .header .logoContaner {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 100%;
+    background-color: black;
+    position: relative;
+    overflow: hidden;
+    transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
+}
+
+.sideBar .header .logoContaner .logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 25%;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.sideBar .header .logoContaner:hover {
+    transform: scale(1.1);
+}
+
+.sideBar .header .logoContaner:hover .logo {
+    filter: brightness(40%);
+}
+
+.sideBar .header .logoContaner .cogIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2rem;
+    height: 2rem;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
+        visibility 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.sideBar .header .logoContaner:hover .cogIcon {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) rotate(360deg);
+}
+
+.sideBar .header .logoContaner:hover .cogIcon {
+    transform: translate(-50%, -50%) rotate(360deg);
+    z-index: 1;
+}
+
+.sideBar .header .greeting .salut {
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+.sideBar .header .greeting .name {
+    font-size: 1.1rem;
+    font-weight: 600;
 }

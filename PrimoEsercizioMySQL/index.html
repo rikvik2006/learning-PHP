@@ -1,3 +1,10 @@
+<?php
+
+declare(strict_types=1);
+
+function load_main_content() {}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,10 +15,20 @@
 
         <title>Home page gestione dei rappresentanti</title>
     </head>
+
     <body>
         <div class="pageContainer">
             <div class="sideBar">
-                <div class="header"></div>
+                <div class="header">
+                    <div class="logoContaner">
+                        <img class="cogIcon" src="./img/cogIcon.svg" />
+                        <img src="./img/marcelmango.jpg" class="logo" />
+                    </div>
+                    <div class="greeting">
+                        <div class="salut">Ciao</div>
+                        <div class="name">Riccardo</div>
+                    </div>
+                </div>
                 <div class="linksContainer">
                     <a class="link" href="./">
                         <div>Home</div>
@@ -33,12 +50,7 @@
                     </a>
                 </div>
             </div>
-            <div class="mainContent">
-                <div>Ciao</div>
-                <div>Ciao</div>
-                <div>Ciao</div>
-                <div>Ciao</div>
-            </div>
+            <div class="mainContent"></div>
         </div>
     </body>
 </html>
