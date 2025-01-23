@@ -3,37 +3,78 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Funzionalità 1 - Filtro Rappresentanti</title>
+        <title>Filtro Rappresentanti</title>
 
         <link rel="stylesheet" href="../style/style.css" />
     </head>
     <body>
-        <div class="formContainer">
-            <form method="get" action="./results.php">
-                <div class="inputContainer">
-                    <label for="minSales">Min Fatturato</label>
-                    <!-- The id "minSales" is used for the label of the input, instead the name attribute minSales is used as the query parameter for the get request, same for the other input -->
-                    <input
-                        type="number"
-                        id="minSales"
-                        name="minSales"
-                        required
-                    />
+        <div class="pageContainer">
+            <div class="sideBar">
+                <div class="header">
+                    <div class="logoContaner">
+                        <img class="cogIcon" src="../img/cogIcon.svg" />
+                        <img src="../img/marcelmango.jpg" class="logo" />
+                    </div>
+                    <div class="greeting">
+                        <div class="salut">Ciao</div>
+                        <div class="name">Riccardo</div>
+                    </div>
                 </div>
-                <div class="inputContainer">
-                    <label for="maxSales">Max Fatturato</label>
-                    <input
-                        type="number"
-                        id="maxSales"
-                        name="maxSales"
-                        required
-                    />
+                <div class="linksContainer">
+                    <a class="link" href="../">
+                        <div>Home</div>
+                    </a>
+                    <a class="link" href="./">
+                        <div>Filtro Rappresentanti</div>
+                    </a>
+                    <a class="link" href="../aumentoPuntiProvvigione/">
+                        <div>Provvigione</div>
+                    </a>
+                    <a class="link" href="../aggiungiRappresentante/">
+                        <div>Aggiungi rappresentante</div>
+                    </a>
+                    <a class="link" href="../eliminaRappresentante/">
+                        <div>Elimina Rappresentante</div>
+                    </a>
+                    <a class="link" href="../visualizzaTabella/">
+                        <div>Visualizza Rappresentanti</div>
+                    </a>
                 </div>
-                <button type="submit">Filtra</button>
-            </form>
-        </div>
-        <div>
-            <a href="../index.html">Home page</a>
+            </div>
+            <div class="mainContent">
+                <div class="centerContent column">
+                    <div class="formContainer">
+                        <div class="formHeader">
+                            <h1>Filtro Rappresentanti</h1>
+                        </div>
+                        <form method="get" action="./results.php">
+                            <div class="inputContainer">
+                                <label for="minSales">Min Fatturato</label>
+                                <input
+                                    type="number"
+                                    id="minSales"
+                                    name="minSales"
+                                    placeholder="0"
+                                    required
+                                />
+                            </div>
+                            <div class="inputContainer">
+                                <label for="maxSales">Max Fatturato</label>
+                                <input
+                                    type="number"
+                                    id="maxSales"
+                                    name="maxSales"
+                                    placeholder="10000"
+                                    required
+                                />
+                            </div>
+                            <button class="button submit" type="submit">
+                                Filtra
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

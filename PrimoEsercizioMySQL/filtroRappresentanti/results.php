@@ -29,7 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] != "GET") {
     exit;
 }
 
-// Input: minSales: type float,  maxSales: type float
+if (!isset($_GET["minSales"]) || !isset($_GET["maxSales"])) {
+    header("Location: ./index.html");
+    exit;
+}
+
 $minSales = sanitize_input($_GET["minSales"]);
 $maxSales = sanitize_input($_GET["maxSales"]);
 
@@ -37,22 +41,6 @@ if (!isset($minSales) || !isset($maxSales)) {
     header("Location: ./index.html");
     exit;
 }
-// } else {
-// Tests
-//     echo "<h3>Valori sanitizati (di tipo stringa dato che arrivano da un query parameters)</h3>";
-//     echo var_dump($minSales);
-//     echo "<br>";
-//     echo var_dump($maxSales);
-//     echo "<h3>Valori trasformati in float (output vardump)</h3>";
-//     echo var_dump((float)$minSales);
-//     echo "<br>";
-//     echo var_dump((float)$maxSales);
-//     echo "<h3>Echo valori float</h3>";
-//     echo $minSales;
-//     echo "<br>";
-//     echo $maxSales;
-//     echo "<br>";
-// }
 
 if (!is_numeric($minSales) || !is_numeric($maxSales)) {
     $error = "Inserisci dei valori numerici";
@@ -83,38 +71,72 @@ if (!is_numeric($minSales) || !is_numeric($maxSales)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Risultati Filtro Rappresentanti</title>
     <link rel="stylesheet" href="../style/style.css">
 </head>
 
 <body>
-    <?php if (!empty($error)): ?>
-        <div class="errorContainer">
-            <?= $error ?>
+    <div class="pageContainer">
+        <div class="sideBar">
+            <div class="header">
+                <div class="logoContaner">
+                    <img class="cogIcon" src="../img/cogIcon.svg" />
+                    <img src="../img/marcelmango.jpg" class="logo" />
+                </div>
+                <div class="greeting">
+                    <div class="salut">Ciao</div>
+                    <div class="name">Riccardo</div>
+                </div>
+            </div>
+            <div class="linksContainer">
+                <a class="link" href="../">
+                    <div>Home</div>
+                </a>
+                <a class="link" href="./">
+                    <div>Filtro Rappresentanti</div>
+                </a>
+                <a class="link" href="../aumentoPuntiProvvigione/">
+                    <div>Provvigione</div>
+                </a>
+                <a class="link" href="../aggiungiRappresentante/">
+                    <div>Aggiungi rappresentante</div>
+                </a>
+                <a class="link" href="../eliminaRappresentante/">
+                    <div>Elimina Rappresentante</div>
+                </a>
+                <a class="link" href="../visualizzaTabella/">
+                    <div>Visualizza Rappresentanti</div>
+                </a>
+            </div>
         </div>
-    <?php else: ?>
-        <table>
-            <thead>
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Cognome</th>
-                <th>UltimoFatturato</th>
-                <th>Regione</th>
-                <th>Provincia</th>
-                <th>PercentualeProvvigione</th>
-            </thead>
-            <tbody>
-                <?php while ($row = $result->fetch_assoc()): ?>
-                    <tr>
-                        <?php echo display_row($row); ?>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    <?php endif; ?>
-    <div>
-        <a href="./index.html">Indietro</a>
-        <a href="../index.html">Home page</a>
+        <div class="mainContent">
+            <div class="table-container">
+                <?php if (!empty($error)): ?>
+                    <div class="error"><?= $error ?></div>
+                <?php else: ?>
+                    <table class="rappresentanti-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nome</th>
+                                <th>Cognome</th>
+                                <th>UltimoFatturato</th>
+                                <th>Regione</th>
+                                <th>Provincia</th>
+                                <th>PercentualeProvvigione</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($row = $result->fetch_assoc()): ?>
+                                <tr>
+                                    <?php echo display_row($row); ?>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
 </body>
 

@@ -62,14 +62,56 @@ if (isset($_POST["region"])) {
 </head>
 
 <body>
-    <?php if (empty($error)): ?>
-        <div>Provvigione aumentanta per tutti i rappresentanti con ultima vendità superiore a 1000 euro provenienti dalla regione <?= sanitize_input($region) ?> e con una percentuale provvigione minore o uguale a 98</div>
-    <?php else: ?>
-        <div class="errorContainer"><?= $error ?></div>
-    <?php endif ?>
-    <div>
-        <a href="./index.php">Indietro</a>
-        <a href="../index.html">Home page</a>
+    <div class="pageContainer">
+        <div class="sideBar">
+            <div class="header">
+                <div class="logoContaner">
+                    <img class="cogIcon" src="../img/cogIcon.svg" />
+                    <img src="../img/marcelmango.jpg" class="logo" />
+                </div>
+                <div class="greeting">
+                    <div class="salut">Ciao</div>
+                    <div class="name">Riccardo</div>
+                </div>
+            </div>
+            <div class="linksContainer">
+                <a class="link" href="../">
+                    <div>Home</div>
+                </a>
+                <a class="link" href="../filtroRappresentanti/">
+                    <div>Filtro Rappresentanti</div>
+                </a>
+                <a class="link" href="./">
+                    <div>Provvigione</div>
+                </a>
+                <a class="link" href="../aggiungiRappresentante/">
+                    <div>Aggiungi rappresentante</div>
+                </a>
+                <a class="link" href="../eliminaRappresentante/">
+                    <div>Elimina Rappresentante</div>
+                </a>
+                <a class="link" href="../visualizzaRappresentanti/">
+                    <div>Visualizza Rappresentanti</div>
+                </a>
+            </div>
+        </div>
+        <div class="mainContent">
+            <div class="centerContent column">
+                <div class="formContainer">
+                    <div class="formHeader">
+                        <h1>Risultati Aumento Provvigione</h1>
+                    </div>
+                    <?php if (empty($error)): ?>
+                        <div class="success" style="padding: 1rem 0;">Provvigione aumentata per tutti i rappresentanti con ultima vendità superiore a 1000 euro provenienti dalla regione <?= sanitize_input($region) ?> e con una percentuale provvigione minore o uguale a 98</div>
+                    <?php else: ?>
+                        <div class="error" style="padding: 1rem 0;"><?= $error ?></div>
+                    <?php endif ?>
+                    <div class="navigationLinks">
+                        <a href="./index.php" class="button">Indietro</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

@@ -27,7 +27,7 @@ function sanitize_input(string $data): string
 </head>
 
 <body class="h-screen w-full flex justify-center items-center">
-    <div class="w-[400px] border rounded-[10px] border-zinc-200 p-4" action="account.php" method="post">
+    <div class="w-[400px] border rounded-[10px] border-zinc-200 p-4">
         <div class="flex flex-col justify-center items-center">
             <h1 class="text-4xl font-bold my-4 text-zinc-900">Login</h1>
         </div>
