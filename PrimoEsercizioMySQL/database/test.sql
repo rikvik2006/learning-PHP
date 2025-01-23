@@ -9,3 +9,5 @@ SET PercentualeProvvigione = PercentualeProvvigione + 2
 WHERE UltimoFatturato > 1000 
 AND Regione = 'Toscana'
 AND PercentualeProvvigione <= 98;
+
+SELECT * FROM Rappresentante WHERE Nome = "Riccardo";
