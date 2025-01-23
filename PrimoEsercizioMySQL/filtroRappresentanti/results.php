@@ -104,7 +104,7 @@ if (!is_numeric($minSales) || !is_numeric($maxSales)) {
                 <a class="link" href="../eliminaRappresentante/">
                     <div>Elimina Rappresentante</div>
                 </a>
-                <a class="link" href="../visualizzaTabella/">
+                <a class="link" href="../visualizzaRappresentanti/">
                     <div>Visualizza Rappresentanti</div>
                 </a>
             </div>
