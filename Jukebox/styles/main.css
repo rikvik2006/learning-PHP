@@ -28,5 +28,17 @@ body {
     height: 100%;
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 65% 35%;
+    grid-template-columns: 78% 22%;
+}
+
+.player_section {
+    background-color: #b7b1f2;
+    position: fixed;
+    height: 100%;
+    right: 0px;
+    width: 22%;
+}
+
+.recently_listened div:not(:first-child) {
+    font-size: 10rem;
 }

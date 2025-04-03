@@ -22,6 +22,7 @@
             <section class="song_selection_section">
                 <div class="recently_listened">
                     <h1>Ascoltati di recente</h1>
+                    <div></div>
                 </div>
             </section>
         </section>
