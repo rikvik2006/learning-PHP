@@ -1,0 +1,8 @@
+/* .recently_listened div:not(:first-child) {
+    font-size: 10rem;
+} */
+
+.recently_listened > div:last-child {
+    font-size: 10rem;
+}
+/*  */

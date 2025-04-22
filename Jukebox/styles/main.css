@@ -39,6 +39,15 @@ body {
     width: 22%;
 }
 
-.recently_listened div:not(:first-child) {
-    font-size: 10rem;
+.content_section {
+    padding: 0 3.813rem;
+}
+
+input[type="text"] {
+    all: unset;
+}
+
+.section_title {
+    font-size: 1.5rem;
+    margin: 2.7rem 0 3rem 0;
 }

@@ -1,0 +1,25 @@
+.content_section .header_container {
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--foreground);
+    margin: 0.688em 0;
+
+    align-items: center;
+}
+
+.header_container .links_container {
+    display: flex;
+    flex-direction: row;
+    gap: 3.813em;
+}
+
+.header_container .searchbar {
+    display: flex;
+    background-color: var(--secondary-background);
+    border-radius: 10rem;
+    padding: 0.8rem 1.5rem;
+    margin: auto;
+    color: var(--secondary-foreground);
+}
