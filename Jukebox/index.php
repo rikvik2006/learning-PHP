@@ -6,6 +6,7 @@ require_once __DIR__ . "/models/ArtistModel.php";
 require_once __DIR__ . "/classes/Artist.php";
 require_once __DIR__ . "/models/SongModel.php";
 require_once __DIR__ . "/classes/Song.php";
+require_once __DIR__ . "/models/InterpretationModel.php";
 
 function sanitize_input(string $data)
 {
@@ -20,6 +21,8 @@ $songs = $songModel->getAllSongs();
 
 $artistModel = new ArtistModel();
 $artists = $artistModel->getAllArtist();
+
+$interpretationModel = new InterpretationModel();
 
 ?>
 
@@ -64,7 +67,7 @@ $artists = $artistModel->getAllArtist();
                                 <div class="song_details">
                                     <div class="song_type">Brano</div>
                                     <div class="title_artist_container">
-                                        <!-- <div class="song_artist">< ?= htmlspecialchars($song->) ?></div> -->
+                                        <div class="song_artist"><?= htmlspecialchars(implode(', ', array_map(fn($artist) => $artist->stage_name, $interpretationModel->getArtistsBySong($song->id)))) ?></div>
                                         <h2 class="song_title"><?= htmlspecialchars($song->title) ?></h2>
                                     </div>
                                 </div>

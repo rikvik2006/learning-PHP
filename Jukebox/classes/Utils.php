@@ -26,4 +26,14 @@ class UUID
         // Output the 36 character UUID.
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
+
+    public static function checkV4(string $uuid): bool
+    {
+        // Check if the UUID is valid
+        if (!preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $uuid)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
