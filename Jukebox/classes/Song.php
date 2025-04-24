@@ -27,8 +27,8 @@ class Song
         $this->audio_file = $data['audio_file'];
         $this->cover_image = $data['cover_image'];
         $this->canvas_background_image = $data['canvas_background_image'];
-        $this->created_at = $data['created_at'];
-        $this->updated_at = $data['updated_at'];
+        $this->created_at = $data['created_at'] ?? '';
+        $this->updated_at = $data['updated_at'] ?? '';
     }
 
     public static function builder(): SongBuilder
