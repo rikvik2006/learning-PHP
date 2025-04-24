@@ -9,8 +9,10 @@ class SongModel extends BaseModel
 {
     /**
      * Return all songs
+     * 
+     * @return Song[]
      */
-    public function getAllSongs()
+    public function getAllSongs(): array
     {
         $sql_query = "SELECT * FROM song";
         $result = $this->connection->query($sql_query);

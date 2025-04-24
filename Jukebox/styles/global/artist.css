@@ -1,0 +1,26 @@
+.artist_item {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.artist_item:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.artist_item .artist_image {
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 100%;
+}
+
+.artist_item .artist_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-drag: none;
+}

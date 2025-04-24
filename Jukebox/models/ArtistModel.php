@@ -8,9 +8,10 @@ require_once __DIR__ . "/../classes/Artist.php";
 class ArtistModel extends BaseModel
 {
     /**
-     * Return all artist
+     * Return an array of artist
+     * @return Artist[]
      */
-    public function getAllArtist()
+    public function getAllArtist(): array
     {
         $sql_query = "SELECT * FROM artist";
         $result = $this->connection->query($sql_query);

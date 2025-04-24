@@ -38,6 +38,17 @@ class Artist
     {
         return new ArtistBuilder();
     }
+
+    /**
+     * Get the file name of the profile picture of the artist, that is of this type UUID.[jpg|png|webp]
+     * @return string The file name of the profile picture, or the default image if not found.
+     */
+    public function getProfilePictureFileName(): string
+    {
+        $cover_dir = __DIR__ . "/../database/data/profile_pictures/";
+        $coverName = glob($cover_dir . $this->profile_picture . ".*");
+        return !empty($coverName) ? basename($coverName[0]) : 'default_pfp.jpg';
+    }
 }
 
 /**

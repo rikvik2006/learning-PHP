@@ -5,4 +5,26 @@
 .recently_listened > div:last-child {
     font-size: 10rem;
 }
-/*  */
+
+.recently_listened {
+    display: flex;
+    flex-direction: column;
+}
+
+.item_container {
+    display: flex;
+    flex-direction: row;
+    gap: 2.5rem;
+    overflow-x: scroll;
+    padding: 0 0 2rem 0;
+}
+
+.item_container::-webkit-scrollbar {
+    background-color: transparent;
+    height: 10px;
+}
+
+.item_container::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-background);
+    border-radius: 10px;
+}

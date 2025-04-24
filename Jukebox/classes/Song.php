@@ -35,6 +35,17 @@ class Song
     {
         return new SongBuilder();
     }
+
+    /**
+     * Get the file name of the cover image, that is of this type UUID.[jpg|png|webp]
+     * @return string The file name of the cover image, or the default image if not found.
+     */
+    public function getCoverImageFileName(): string
+    {
+        $cover_dir = __DIR__ . "/../database/data/songs_covers/";
+        $coverName = glob($cover_dir . $this->cover_image . ".*");
+        return !empty($coverName) ? basename($coverName[0]) : 'default_cover.jpg';
+    }
 }
 
 /**
