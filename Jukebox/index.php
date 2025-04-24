@@ -93,6 +93,7 @@ if ($currentSong) {
 
     // Controllo se il brano ha un canvas background
     $hasCanvas = !empty($currentSong->canvas_background_image);
+    $hasCanvas = !empty($currentSong->getCanvasFileName());
     $canvasExt = $hasCanvas ? pathinfo($currentSong->getCanvasFileName(), PATHINFO_EXTENSION) : '';
     $isCanvasVideo = $hasCanvas && in_array($canvasExt, ['mp4', 'webm']);
 }

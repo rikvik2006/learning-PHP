@@ -60,11 +60,9 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
             $releaseDate = date('d/m/Y', strtotime($song->release_date));
 
             // Controllo se il brano ha un canvas background
-            echo "<script>console.log('Canvas background: " . $song->canvas_background_image . "');</script>";
 
             $hasCanvas = !empty($song->canvas_background_image);
             $hasCanvas = !empty($song->getCanvasFileName());
-            echo "<script>console.log('Has canvas: " . ($hasCanvas ? 'true' : 'false') . "');</script>";
             $canvasExt = $hasCanvas ? pathinfo($song->getCanvasFileName(), PATHINFO_EXTENSION) : '';
             $isCanvasVideo = $hasCanvas && in_array($canvasExt, ['mp4', 'webm']);
         }
