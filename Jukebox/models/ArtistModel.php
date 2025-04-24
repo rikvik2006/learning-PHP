@@ -45,10 +45,10 @@ class ArtistModel extends BaseModel
 
     public function createArtist(Artist $artist)
     {
-        $sql_query = "INSERT INTO artist INSERT INTO `artist` (`id`, `stage_name`, `name`, `surname`, `birth_date`, `biography`, `gender`, `profile_picture`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql_query = "INSERT INTO `artist` (`id`, `stage_name`, `name`, `surname`, `birth_date`, `biography`, `gender`, `profile_picture`, `visible`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connection->prepare($sql_query);
-        $stauts = $stmt->bind_param(
-            "ssssssss",
+        $status = $stmt->bind_param(
+            "sssssssss",
             $artist->id,
             $artist->stage_name,
             $artist->name,
@@ -56,10 +56,11 @@ class ArtistModel extends BaseModel
             $artist->birth_date,
             $artist->biography,
             $artist->gender,
-            $artist->profile_picture
+            $artist->profile_picture,
+            $artist->visible
         );
 
-        if (!$stauts) {
+        if (!$status) {
             throw new Exception('Bind failed: ' . $this->connection->error);
         }
 

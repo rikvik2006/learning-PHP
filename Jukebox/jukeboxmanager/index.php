@@ -149,7 +149,7 @@ $search_term = isset($_GET['search']) ? sanitize_input($_GET['search']) : '';
 
             <section class="manager-section" id="artists-section">
                 <h1 class="section-title">Tutti gli artisti</h1>
-                <a href="add_artist.php" class="add-button">
+                <a href="../addartist/" class="add-button">
                     <i class="fas fa-plus"></i> Aggiungi nuovo artista
                 </a>
 

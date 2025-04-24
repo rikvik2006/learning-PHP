@@ -1,0 +1,63 @@
+/* Stili specifici per la pagina di aggiunta artista */
+.gender-selector {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.gender-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.gender-option:hover {
+    transform: translateY(-2px);
+}
+
+.gender-option input {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+.visible-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.visible-checkbox:hover {
+    transform: translateX(5px);
+}
+
+.visible-checkbox input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.visible-checkbox label {
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.artist-preview-image {
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.artist-preview-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artist-cover-placeholder {
+    border-radius: 50%;
+}

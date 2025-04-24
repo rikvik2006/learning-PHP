@@ -147,7 +147,7 @@ if (isset($_POST['create_song'])) {
                 $success_message = "Brano creato con successo!";
 
                 // Reindirizza alla pagina principale dopo 2 secondi
-                header("refresh:2;url=index.php");
+                header("refresh:2;url=../jukeboxmanager/");
             }
         } catch (Exception $e) {
             $errors[] = "Errore durante la creazione del brano: " . $e->getMessage();

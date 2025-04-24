@@ -30,8 +30,8 @@ class Artist
         $this->gender = $data['gender'];
         $this->profile_picture = $data['profile_picture'];
         $this->visible = (bool) $data['visible'];
-        $this->created_at = $data['created_at'];
-        $this->updated_at = $data['updated_at'];
+        $this->created_at = $data['created_at'] ?? '';
+        $this->updated_at = $data['updated_at'] ?? '';
     }
 
     public static function builder(): ArtistBuilder
