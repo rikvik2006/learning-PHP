@@ -1,0 +1,113 @@
+<?php
+
+declare(strict_types=1);
+
+require_once __DIR__ . "/BaseModel.php";
+require_once __DIR__ . "/../classes/Song.php";
+
+class SongModel extends BaseModel
+{
+    /**
+     * Return all songs
+     */
+    public function getAllSongs()
+    {
+        $sql_query = "SELECT * FROM song";
+        $result = $this->connection->query($sql_query);
+
+        if (!$result) {
+            throw new Exception('Query failed: ' . $this->connection->error);
+        }
+
+        $songs = [];
+        while ($data = $result->fetch_assoc()) {
+            // append the new song to the array
+            $songs[] = new Song($data);
+        }
+
+        return $songs;
+    }
+
+    public function getSongById(string $uuid)
+    {
+        $sql_query = "SELECT * FROM song WHERE id = '$uuid'";
+        $result = $this->connection->query($sql_query);
+
+        if (!$result) {
+            throw new Exception('Query failed: ' . $this->connection->error);
+        }
+
+        $data = $result->fetch_assoc();
+        $song = new Song($data);
+        return $song;
+    }
+
+    public function createSong(Song $song)
+    {
+        $sql_query = "INSERT INTO song (id, title, duration, release_date, lyrics, audio_file, cover_image, canvas_background_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->connection->prepare($sql_query);
+        $status = $stmt->bind_param(
+            "ssssssss",
+            $song->id,
+            $song->title,
+            $song->duration,
+            $song->release_date,
+            $song->lyrics,
+            $song->audio_file,
+            $song->cover_image,
+            $song->canvas_background_image
+        );
+        if (!$status) {
+            throw new Exception('Binding parameters failed: ' . $stmt->error);
+        }
+        $status = $stmt->execute();
+        if (!$status) {
+            throw new Exception('Execution failed: ' . $stmt->error);
+        }
+        $stmt->close();
+    }
+
+    public function updateSong(Song $song)
+    {
+        $sql_query = "UPDATE song SET title = ?, duration = ?, release_date = ?, lyrics = ?, audio_file = ?, cover_image = ?, canvas_background_image = ? WHERE id = ?";
+        $stmt = $this->connection->prepare($sql_query);
+        $status = $stmt->bind_param(
+            "ssssssss",
+            $song->title,
+            $song->duration,
+            $song->release_date,
+            $song->lyrics,
+            $song->audio_file,
+            $song->cover_image,
+            $song->canvas_background_image,
+            $song->id
+        );
+        if (!$status) {
+            throw new Exception('Binding parameters failed: ' . $stmt->error);
+        }
+        $status = $stmt->execute();
+        if (!$status) {
+            throw new Exception('Execution failed: ' . $stmt->error);
+        }
+        $stmt->close();
+    }
+
+    /**
+     * Delete song by id
+     * @param string $uuid
+     */
+    public function deleteSong(string $uuid)
+    {
+        $sql_query = "DELETE FROM song WHERE id = '$uuid'";
+        $result = $this->connection->query($sql_query);
+
+        if (!$result) {
+            throw new Exception('Query failed: ' . $this->connection->error);
+        }
+
+        if ($this->connection->affected_rows === 0) {
+            throw new Exception('No rows deleted: ' . $this->connection->error);
+        }
+        $this->connection->close();
+    }
+}

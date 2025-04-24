@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+/**
+ * Artist class represents an artist in the jukebox system.
+ */
 class Artist
 {
     public string $id;
@@ -37,6 +40,10 @@ class Artist
     }
 }
 
+/**
+ * ArtistBuilder is a builder class for creating Artist objects.
+ * It provides methods to set the properties of the Artist object.
+ */
 class ArtistBuilder
 {
     private array $data = [];

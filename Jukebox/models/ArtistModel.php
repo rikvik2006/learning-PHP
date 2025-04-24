@@ -87,6 +87,10 @@ class ArtistModel extends BaseModel
         );
     }
 
+    /**
+     * Delete artist by id
+     * @param string $uuid
+     */
     public function deleteArtist(string $uuid)
     {
         $sql_query = "DELETE FROM artist WHERE id = ?";
