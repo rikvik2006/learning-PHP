@@ -3,6 +3,8 @@
     flex-direction: column;
     width: 250px;
     transition: transform 0.2s ease-in-out;
+    text-decoration: none;
+    color: var(--foreground);
 }
 
 .song_item:hover {

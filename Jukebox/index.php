@@ -60,7 +60,7 @@ $interpretationModel = new InterpretationModel();
                     <div class="item_container">
                         <?php while ($song = array_shift($songs)): ?>
                             <!-- Start Song Template -->
-                            <div class="song_item">
+                            <a href="./song/?id=<?= htmlspecialchars($song->id) ?>" class="song_item">
                                 <div class="song_image">
                                     <img src="./database/data/songs_covers/<?= htmlspecialchars($song->getCoverImageFileName()) ?>" alt="Album Cover">
                                 </div>
@@ -71,7 +71,7 @@ $interpretationModel = new InterpretationModel();
                                         <h2 class="song_title"><?= htmlspecialchars($song->title) ?></h2>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                             <!-- End Song Template -->
                         <?php endwhile; ?>
                     </div>

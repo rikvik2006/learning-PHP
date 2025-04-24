@@ -46,6 +46,32 @@ class Song
         $coverName = glob($cover_dir . $this->cover_image . ".*");
         return !empty($coverName) ? basename($coverName[0]) : 'default_cover.jpg';
     }
+
+    /**
+     * Get the file name of the canvas background, that is of this type UUID.[jpg|png|webp|mp4]
+     * @return string The file name of the canvas background, or empty string if not found.
+     */
+    public function getCanvasFileName(): string
+    {
+        if (empty($this->canvas_background_image)) {
+            return '';
+        }
+
+        $canvas_dir = __DIR__ . "/../database/data/songs_canvas/";
+        $canvasName = glob($canvas_dir . $this->canvas_background_image . ".*");
+        return !empty($canvasName) ? basename($canvasName[0]) : '';
+    }
+
+    /**
+     * Get the file name of the audio file, that is of this type UUID.[mp3|wav|flac]
+     * @return string The file name of the audio file.
+     */
+    public function getAudioFileName(): string
+    {
+        $audio_dir = __DIR__ . "/../database/data/songs_audio/";
+        $audioName = glob($audio_dir . $this->audio_file . ".*");
+        return !empty($audioName) ? basename($audioName[0]) : '';
+    }
 }
 
 /**
