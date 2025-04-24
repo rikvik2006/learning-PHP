@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . "/BaseModel.php";
 require_once __DIR__ . "/../classes/Song.php";
+require_once __DIR__ . "/../classes/FilesystemManager.php";
 
 class SongModel extends BaseModel
 {
@@ -100,16 +101,22 @@ class SongModel extends BaseModel
      */
     public function deleteSong(string $uuid)
     {
-        $sql_query = "DELETE FROM song WHERE id = '$uuid'";
-        $result = $this->connection->query($sql_query);
+        $sql_query = "DELETE FROM song WHERE id = ?";
+        $stmt = $this->connection->prepare($sql_query);
+        $status = $stmt->bind_param("s", $uuid);
 
-        if (!$result) {
-            throw new Exception('Query failed: ' . $this->connection->error);
+        if (!$status) {
+            throw new Exception('Binding parameters failed: ' . $this->connection->error);
         }
 
-        if ($this->connection->affected_rows === 0) {
-            throw new Exception('No rows deleted: ' . $this->connection->error);
+        $status = $stmt->execute();
+
+        if (!$status) {
+            throw new Exception('Execution failed: ' . $stmt->error);
         }
-        $this->connection->close();
+        $stmt->close();
+
+        // Delete the files associated with the song from the filesystem
+        FilesystemManager::deleteSongFiles($uuid);
     }
 }

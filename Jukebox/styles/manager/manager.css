@@ -1,0 +1,149 @@
+/* Stili specifici per il manager */
+.manager-section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: transparent;
+    border: 2px dashed var(--primary);
+    color: var(--primary);
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    width: 100%;
+}
+
+.add-button:hover {
+    background-color: rgba(29, 208, 93, 0.1);
+    transform: scale(1.01);
+}
+
+.item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item-row {
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary-background);
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.item-row:hover {
+    transform: translateX(5px);
+    background-color: rgba(25, 25, 25, 0.9);
+}
+
+.item-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.artist-image {
+    border-radius: 50%;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-info {
+    flex-grow: 1;
+}
+
+.item-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 3px;
+}
+
+.item-subtitle {
+    color: var(--secondary-foreground);
+    font-size: 14px;
+}
+
+.item-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    color: var(--secondary-foreground);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-button:hover {
+    color: var(--foreground);
+    transform: scale(1.1);
+}
+
+.action-button.delete:hover {
+    color: #ff4c4c;
+}
+
+.action-button.edit:hover {
+    color: var(--primary);
+}
+
+.notification {
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.success {
+    background-color: rgba(29, 208, 93, 0.2);
+    color: var(--primary);
+    border-left: 4px solid var(--primary);
+}
+
+.error {
+    background-color: rgba(255, 76, 76, 0.2);
+    color: #ff4c4c;
+    border-left: 4px solid #ff4c4c;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.no-results {
+    color: var(--secondary-foreground);
+    padding: 20px 0;
+    text-align: center;
+    font-style: italic;
+}

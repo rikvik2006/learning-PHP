@@ -15,6 +15,11 @@
     gap: 3.813em;
 }
 
+.header_container .links_container a {
+    color: var(--foreground);
+    text-decoration: none;
+}
+
 .header_container .searchbar {
     display: flex;
     background-color: var(--secondary-background);

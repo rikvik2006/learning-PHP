@@ -107,5 +107,8 @@ class ArtistModel extends BaseModel
             throw new Exception('Execute failed: ' . $stmt->error);
         }
         $stmt->close();
+
+        // Delete the files associated with the artist from the filesystem
+        FilesystemManager::deleteArtistFiles($uuid);
     }
 }
