@@ -41,6 +41,11 @@ class SongModel extends BaseModel
         }
 
         $data = $result->fetch_assoc();
+
+        if (!$data) {
+            return null;
+        }
+
         $song = new Song($data);
         return $song;
     }
