@@ -104,15 +104,32 @@ $search_term = isset($_GET['search']) ? sanitize_input($_GET['search']) : '';
                     <?php
                     $song_found = false;
                     foreach ($songs as $song):
+                        // Ottieni tutti gli artisti associati al brano
                         $song_artists = $interpretationModel->getArtistsBySong($song->id);
-                        $artists_names = array_map(fn($artist) => $artist->stage_name, $song_artists);
-                        $artists_string = implode(", ", $artists_names);
+
+                        // Separa gli artisti principali e featuring
+                        $main_artists = [];
+                        $featuring_artists = [];
+
+                        foreach ($song_artists as $artist) {
+                            $type = $interpretationModel->getInterpretationType($artist->id, $song->id);
+                            if ($type === 'main') {
+                                $main_artists[] = $artist;
+                            } else if ($type === 'featured') {
+                                $featuring_artists[] = $artist;
+                            }
+                        }
+
+                        // Converti gli array in stringhe per la ricerca
+                        $main_artists_names = array_map(fn($artist) => $artist->stage_name, $main_artists);
+                        $featuring_artists_names = array_map(fn($artist) => $artist->stage_name, $featuring_artists);
+                        $all_artists_string = implode(", ", array_merge($main_artists_names, $featuring_artists_names));
 
                         // Filtraggio in base alla ricerca
                         if (
                             !empty($search_term) &&
                             stripos($song->title, $search_term) === false &&
-                            stripos($artists_string, $search_term) === false
+                            stripos($all_artists_string, $search_term) === false
                         ) {
                             continue;
                         }
@@ -121,20 +138,55 @@ $search_term = isset($_GET['search']) ? sanitize_input($_GET['search']) : '';
                     ?>
                         <div class="item-row">
                             <div class="item-image">
-                                <img src="../database/data/songs_covers/<?= htmlspecialchars($song->getCoverImageFileName()) ?>" alt="Cover di <?= htmlspecialchars($song->title) ?>">
+                                <a href="../song/?id=<?= htmlspecialchars($song->id) ?>">
+                                    <img src="../database/data/songs_covers/<?= htmlspecialchars($song->getCoverImageFileName()) ?>" alt="Cover di <?= htmlspecialchars($song->title) ?>">
+                                </a>
                             </div>
                             <div class="item-info">
-                                <div class="item-title"><?= htmlspecialchars($song->title) ?></div>
-                                <div class="item-subtitle"><?= htmlspecialchars($artists_string) ?></div>
+                                <div class="item-title">
+                                    <a href="../song/?id=<?= htmlspecialchars($song->id) ?>" class="song-link"><?= htmlspecialchars($song->title) ?></a>
+                                </div>
+                                <div class="item-subtitle artists-container">
+                                    <?php if (!empty($main_artists)): ?>
+                                        <div class="artist-group">
+                                            <span class="artist-type-label main-label">Artisti</span>
+                                            <div class="artists-list">
+                                                <?php
+                                                $artist_links = array_map(function ($artist) {
+                                                    return '<a href="../artist/?id=' . htmlspecialchars($artist->id) . '" class="artist-link">' . htmlspecialchars($artist->stage_name) . '</a>';
+                                                }, $main_artists);
+                                                echo implode(', ', $artist_links);
+                                                ?>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if (!empty($featuring_artists)): ?>
+                                        <div class="artist-group">
+                                            <span class="artist-type-label featuring-label">Feat.</span>
+                                            <div class="artists-list">
+                                                <?php
+                                                $feat_links = array_map(function ($artist) {
+                                                    return '<a href="../artist/?id=' . htmlspecialchars($artist->id) . '" class="artist-link">' . htmlspecialchars($artist->stage_name) . '</a>';
+                                                }, $featuring_artists);
+                                                echo implode(', ', $feat_links);
+                                                ?>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                             <div class="item-actions">
+                                <a href="../song/?id=<?= htmlspecialchars($song->id) ?>" class="action-button" title="Visualizza brano">
+                                    <i class="fas fa-eye"></i>
+                                </a>
                                 <form method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questo brano?');">
                                     <input type="hidden" name="song_id" value="<?= htmlspecialchars($song->id) ?>">
-                                    <button type="submit" name="delete_song" class="action-button delete">
+                                    <button type="submit" name="delete_song" class="action-button delete" title="Elimina brano">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
-                                <a href="edit_song.php?id=<?= htmlspecialchars($song->id) ?>" class="action-button edit">
+                                <a href="edit_song.php?id=<?= htmlspecialchars($song->id) ?>" class="action-button edit" title="Modifica brano">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </div>
@@ -166,20 +218,27 @@ $search_term = isset($_GET['search']) ? sanitize_input($_GET['search']) : '';
                     ?>
                         <div class="item-row">
                             <div class="item-image artist-image">
-                                <img src="../database/data/profile_pictures/<?= htmlspecialchars($artist->getProfilePictureFileName()) ?>" alt="Foto di <?= htmlspecialchars($artist->stage_name) ?>">
+                                <a href="../artist/?id=<?= htmlspecialchars($artist->id) ?>">
+                                    <img src="../database/data/profile_pictures/<?= htmlspecialchars($artist->getProfilePictureFileName()) ?>" alt="Foto di <?= htmlspecialchars($artist->stage_name) ?>">
+                                </a>
                             </div>
                             <div class="item-info">
-                                <div class="item-title"><?= htmlspecialchars($artist->stage_name) ?></div>
+                                <div class="item-title">
+                                    <a href="../artist/?id=<?= htmlspecialchars($artist->id) ?>" class="song-link"><?= htmlspecialchars($artist->stage_name) ?></a>
+                                </div>
                                 <div class="item-subtitle">Artista</div>
                             </div>
                             <div class="item-actions">
+                                <a href="../artist/?id=<?= htmlspecialchars($artist->id) ?>" class="action-button" title="Visualizza artista">
+                                    <i class="fas fa-eye"></i>
+                                </a>
                                 <form method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questo artista?');">
                                     <input type="hidden" name="artist_id" value="<?= htmlspecialchars($artist->id) ?>">
-                                    <button type="submit" name="delete_artist" class="action-button delete">
+                                    <button type="submit" name="delete_artist" class="action-button delete" title="Elimina artista">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
-                                <a href="edit_artist.php?id=<?= htmlspecialchars($artist->id) ?>" class="action-button edit">
+                                <a href="edit_artist.php?id=<?= htmlspecialchars($artist->id) ?>" class="action-button edit" title="Modifica artista">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </div>
