@@ -146,4 +146,39 @@ class InterpretationModel extends BaseModel
 
         $stmt->close();
     }
+
+    /**
+     * Ottiene il tipo di interpretazione di un artista per una canzone specifica
+     * 
+     * @param string $artistId ID dell'artista
+     * @param string $songId ID della canzone
+     * @return string|null Il tipo di interpretazione ('main', 'featured') o null se non trovato
+     * @throws Exception
+     */
+    public function getInterpretationType(string $artistId, string $songId): ?string
+    {
+        // Controllo validità UUID
+        if (!UUID::checkV4($artistId)) {
+            throw new Exception('Invalid UUID format for artistId');
+        }
+        if (!UUID::checkV4($songId)) {
+            throw new Exception('Invalid UUID format for songId');
+        }
+
+        $sql_query = "SELECT interpretation_type FROM interpretation WHERE artist_id = ? AND song_id = ?";
+        $stmt = $this->connection->prepare($sql_query);
+        $stmt->bind_param("ss", $artistId, $songId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if (!$result) {
+            throw new Exception('Query failed: ' . $this->connection->error);
+        }
+
+        if ($row = $result->fetch_assoc()) {
+            return $row['interpretation_type'];
+        }
+
+        return null;
+    }
 }

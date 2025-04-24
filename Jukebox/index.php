@@ -81,7 +81,7 @@ $interpretationModel = new InterpretationModel();
                     <div class="item_container">
                         <?php while ($artist = array_shift($artists)): ?>
                             <!-- Start Artist Template -->
-                            <div class="artist_item">
+                            <a href="./artist/?id=<?= htmlspecialchars($artist->id) ?>" class="artist_item">
                                 <div class="artist_image">
                                     <img src="./database/data/profile_pictures/<?= htmlspecialchars($artist->getProfilePictureFileName()) ?>" alt="Artist Image">
                                 </div>
@@ -89,13 +89,13 @@ $interpretationModel = new InterpretationModel();
                                     <div class="song_type">Artista</div>
                                     <h2 class="artist_name"><?= htmlspecialchars($artist->stage_name) ?></h2>
                                 </div>
-                            </div>
+                            </a>
                             <!-- End Artist Template -->
                         <?php endwhile; ?>
                     </div>
                 </div>
             </section>
-        </section>1
+        </section>
         <section class="player_section">
             <div>Player</div>
         </section>

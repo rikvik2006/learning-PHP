@@ -1,24 +1,7 @@
 <?php
 require_once __DIR__ . "/../models/BaseModel.php";
-
-class TestModel extends BaseModel
-{
-    public function getAllArtist()
-    {
-        $sql_query = "SELECT * FROM artist";
-        $result = $this->connection->query($sql_query);
-
-        return $result;
-    }
-
-    public function getArtistById(string $uuid)
-    {
-        $sql_query = "SELECT * FROM artist WHERE id = '$uuid'";
-        $result = $this->connection->query($sql_query);
-
-        return $result;
-    }
-}
+require_once __DIR__ . "/../models/ArtistModel.php";
+require_once __DIR__ . "/../models/InterpretationModel.php";
 
 ?>
 
@@ -33,16 +16,19 @@ class TestModel extends BaseModel
 
 <body>
     <?php
-    $testModel = new TestModel();
+    $testModel = new ArtistModel();
 
     $all_artist = $testModel->getAllArtist();
     $artist = $testModel->getArtistById("0211306f-c841-4545-80f3-75e88cbc04bd");
 
-    print_r($all_artist->fetch_all());
+    for ($i = 0; $i < count($all_artist); $i++) {
+        echo $all_artist[$i]->stage_name . "<br>";
+    }
+
+
     echo "<br>";
-    echo "<br>";
-    echo "<br>";
-    print_r($artist->fetch_assoc());
+
+    echo $artist->stage_name . "<br>";
     ?>
 </body>
 

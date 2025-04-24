@@ -32,7 +32,7 @@ body {
 }
 
 .player_section {
-    background-color: #b7b1f2;
+    background-color: var(--background);
     position: fixed;
     height: 100%;
     right: 0px;

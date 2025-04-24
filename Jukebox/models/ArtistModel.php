@@ -31,7 +31,7 @@ class ArtistModel extends BaseModel
 
     public function getArtistById(string $uuid)
     {
-        $sql_query = "SELECT * FROM artist WHERE id = $uuid";
+        $sql_query = "SELECT * FROM artist WHERE id = '$uuid'";
         $result = $this->connection->query($sql_query);
 
         if (!$result) {
