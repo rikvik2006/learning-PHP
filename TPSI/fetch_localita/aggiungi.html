@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./style/style.css" />
+        <script src="javascript/script.js" defer></script>
+        <title>Aggiungi Comune</title>
+    </head>
+
+    <body>
+        <nav class="navbar">
+            <div class="logo">Comuni Italiani</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li>
+                    <a href="aggiungi.html" class="active">Aggiungi Comune</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container">
+            <h1>Aggiungi Nuovo Comune</h1>
+
+            <div id="message" class="message"></div>
+
+            <div class="form-container">
+                <form id="form-aggiungi-comune">
+                    <div class="form-group">
+                        <label for="name">Nome del Comune</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Es. Milano"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="slug">Slug</label>
+                        <input
+                            type="text"
+                            id="slug"
+                            name="slug"
+                            placeholder="Es. milano"
+                        />
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="lat">Latitudine</label>
+                            <input
+                                type="text"
+                                id="lat"
+                                name="lat"
+                                placeholder="Es. 45.4642"
+                                required
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lng">Longitudine</label>
+                            <input
+                                type="text"
+                                id="lng"
+                                name="lng"
+                                placeholder="Es. 9.1900"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="codice_provincia_istat"
+                                >Codice Provincia ISTAT</label
+                            >
+                            <input
+                                type="text"
+                                id="codice_provincia_istat"
+                                name="codice_provincia_istat"
+                                placeholder="Es. 015"
+                                required
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="codice_comune_istat"
+                                >Codice Comune ISTAT</label
+                            >
+                            <input
+                                type="text"
+                                id="codice_comune_istat"
+                                name="codice_comune_istat"
+                                placeholder="Es. 146"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codice_alfanumerico_istat"
+                            >Codice Alfanumerico ISTAT</label
+                        >
+                        <input
+                            type="text"
+                            id="codice_alfanumerico_istat"
+                            name="codice_alfanumerico_istat"
+                            placeholder="Es. 015146"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-row checkbox-row">
+                        <div class="form-group checkbox">
+                            <input
+                                type="checkbox"
+                                id="capoluogo_provincia"
+                                name="capoluogo_provincia"
+                                value="1"
+                            />
+                            <label for="capoluogo_provincia"
+                                >Capoluogo di Provincia</label
+                            >
+                        </div>
+
+                        <div class="form-group checkbox">
+                            <input
+                                type="checkbox"
+                                id="capoluogo_regione"
+                                name="capoluogo_regione"
+                                value="1"
+                            />
+                            <label for="capoluogo_regione"
+                                >Capoluogo di Regione</label
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group submit-group">
+                        <button type="submit" class="btn primary">
+                            Aggiungi Comune
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

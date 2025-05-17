@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./style/style.css" />
+        <script src="javascript/script.js" defer></script>
+        <title>Comuni Italiani</title>
+    </head>
+
+    <body>
+        <nav class="navbar">
+            <div class="logo">Comuni Italiani</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="aggiungi.html">Aggiungi Comune</a></li>
+            </ul>
+        </nav>
+
+        <div class="container">
+            <h1>Lista dei Comuni</h1>
+
+            <div class="button-container">
+                <button class="btn primary" onclick="fetchComuni()">
+                    Carica Comuni
+                </button>
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <div class="table-container">
+                <table id="comuni-table" class="hidden">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Latitudine</th>
+                            <th>Longitudine</th>
+                            <th>Codice Provincia</th>
+                            <th>Capoluogo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comuni-tbody">
+                        <!-- I dati dei comuni verranno inseriti qui -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
