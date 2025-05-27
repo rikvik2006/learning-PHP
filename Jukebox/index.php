@@ -196,9 +196,9 @@ function formatSongArtists($songId, $interpretationModel)
                     <a href="./">Home</a>
                     <a href="./jukeboxmanager/">Jukebox Manager</a>
                 </div>
-                <form class="searchbar" action="" method="get">
+                <form class="searchbar" action="./search/" method="get">
                     <img src="./img/magnifing_glass.svg" alt="Search Icon">
-                    <input type="text" name="search" placeholder="Cerca brani o artisti">
+                    <input type="text" name="q" placeholder="Cerca brani o artisti">
                 </form>
             </div>
 

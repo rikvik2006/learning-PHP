@@ -1,0 +1,450 @@
+/* Stili per la pagina di ricerca */
+.search-results {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+/* Stato senza risultati */
+.no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    text-align: center;
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.no-results i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.no-results h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.no-results p {
+    color: var(--secondary-foreground);
+}
+
+/* Layout per i risultati principali */
+.top-results-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.top-result {
+    width: 40%;
+    min-width: 300px;
+}
+
+.top-songs {
+    flex: 1;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--primary);
+    padding-left: 1rem;
+}
+
+/* Stile per il risultato principale (brano) */
+.top-song-card {
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary-background);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--foreground);
+    transition: all 0.3s ease;
+}
+
+.text-decoration-none {
+    text-decoration: none;
+}
+
+.top-song-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.top-song-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-right: 1rem;
+}
+
+.top-song-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.top-song-info {
+    flex: 1;
+}
+
+.top-song-info .song-title {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.top-song-info .song-subtitle {
+    color: var(--secondary-foreground);
+}
+
+.play-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    border-radius: 50%;
+    color: #000;
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+}
+
+/* Stile per il risultato principale (artista) */
+.top-artist-card {
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary-background);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--foreground);
+    transition: all 0.3s ease;
+}
+
+.top-artist-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.top-artist-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 1rem;
+}
+
+.top-artist-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.top-artist-info {
+    flex: 1;
+}
+
+.top-artist-info .artist-name {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.top-artist-info .artist-type {
+    color: var(--secondary-foreground);
+}
+
+/* Stile per la lista dei brani correlati */
+.songs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.song-item {
+    background-color: var(--secondary-background);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.song-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.song-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    color: var(--foreground);
+    text-decoration: none;
+}
+
+.song-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-right: 1rem;
+    position: relative;
+}
+
+.song-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.2s ease;
+}
+
+.play-overlay i {
+    color: #fff;
+}
+
+.song-details {
+    flex: 1;
+}
+
+.song-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.song-artist {
+    font-size: 0.9rem;
+    color: var(--secondary-foreground);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.song-duration {
+    color: var(--secondary-foreground);
+    font-size: 0.9rem;
+    margin-left: 1rem;
+}
+
+/* Stile per la sezione degli artisti */
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.artist-card {
+    background-color: var(--secondary-background);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--foreground);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.artist-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.artist-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.artist-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artist-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.artist-type {
+    font-size: 0.9rem;
+    color: var(--secondary-foreground);
+}
+
+/* Stile per la sezione degli altri brani */
+.more-songs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.song-row {
+    background-color: transparent;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.song-row:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.song-row .song-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+}
+
+.song-row-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-right: 1rem;
+    position: relative;
+}
+
+.song-row-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.song-row-details {
+    flex: 1;
+}
+
+.song-row-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.song-row-artist {
+    font-size: 0.9rem;
+    color: var(--secondary-foreground);
+}
+
+.song-row-meta {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.song-release-date,
+.song-row-duration {
+    color: var(--secondary-foreground);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+/* Evidenziazione query di ricerca */
+.highlight {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Link agli artisti */
+.artist-link {
+    color: var(--foreground);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.artist-link:hover {
+    color: var(--primary);
+}
+
+/* Media query per responsive design */
+@media (max-width: 768px) {
+    .top-results-container {
+        flex-direction: column;
+    }
+
+    .top-result,
+    .top-songs {
+        width: 100%;
+        min-width: initial;
+    }
+
+    .artists-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .song-row-meta {
+        display: none;
+    }
+}
+
+/* Loading animation */
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-left-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Transizione della searchbar */
+.searchbar {
+    transition: all 0.3s ease;
+}
+
+.searchbar:focus-within {
+    transform: scale(1.02);
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(29, 208, 93, 0.2);
+}
+
+.searchbar input {
+    transition: all 0.3s ease;
+}
