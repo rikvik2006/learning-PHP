@@ -1,0 +1,105 @@
+/* Stili specifici per la pagina di modifica brano */
+.edit-song-container {
+    width: 100%;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Stile per il pulsante elimina */
+.btn-delete {
+    background-color: transparent;
+    border: 1px solid rgba(255, 76, 76, 0.5);
+    color: #ff4c4c;
+    margin-right: auto; /* Sposta a sinistra */
+}
+
+.btn-delete:hover {
+    background-color: rgba(255, 76, 76, 0.1);
+    border-color: #ff4c4c;
+}
+
+/* Migliore visibilità per l'immagine di copertina esistente */
+.song-cover-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Modifica transizioni per una migliore esperienza utente */
+.song-cover-placeholder .overlay {
+    transition: opacity 0.2s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Badge per indicare il file esistente */
+.upload-description {
+    position: relative;
+}
+
+/* Stile per il messaggio di conferma eliminazione */
+.delete-confirmation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--secondary-background);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.delete-confirmation h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.delete-confirmation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Transizione per gli elementi del form */
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+    transform: translateY(-2px);
+}
+
+/* Animazioni più fluide per i chip degli artisti */
+.selected-artist-chip {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    animation: appearIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes appearIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Effetto hover migliorato per i pulsanti di azione */
+.action-buttons .btn {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.action-buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Stile per la visualizzazione degli stati della modifica */
+.field-modified {
+    border-color: #1db954 !important;
+    box-shadow: 0 0 0 1px rgba(29, 185, 84, 0.3) !important;
+}

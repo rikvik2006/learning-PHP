@@ -181,4 +181,22 @@ class InterpretationModel extends BaseModel
 
         return null;
     }
+
+    /**
+     * Elimina tutte le interpretazioni di un brano
+     */
+    public function deleteInterpretationsBySong(string $songId): void
+    {
+        if (!UUID::checkV4($songId)) {
+            throw new Exception('Invalid UUID format for songId');
+        }
+
+        $sql_query = "DELETE FROM interpretation WHERE song_id = ?";
+        $stmt = $this->connection->prepare($sql_query);
+        $stmt->bind_param("s", $songId);
+
+        if (!$stmt->execute()) {
+            throw new Exception('Failed to delete interpretations: ' . $stmt->error);
+        }
+    }
 }

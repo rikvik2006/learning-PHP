@@ -186,7 +186,7 @@ $search_term = isset($_GET['search']) ? sanitize_input($_GET['search']) : '';
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
-                                <a href="edit_song.php?id=<?= htmlspecialchars($song->id) ?>" class="action-button edit" title="Modifica brano">
+                                <a href="../modifysong/?id=<?= htmlspecialchars($song->id) ?>" class="action-button edit" title="Modifica brano">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </div>

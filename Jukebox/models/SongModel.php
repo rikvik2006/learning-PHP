@@ -75,29 +75,47 @@ class SongModel extends BaseModel
         $stmt->close();
     }
 
-    public function updateSong(Song $song)
+    // public function updateSong(Song $song)
+    // {
+    //     $sql_query = "UPDATE song SET title = ?, duration = ?, release_date = ?, lyrics = ?, audio_file = ?, cover_image = ?, canvas_background_image = ? WHERE id = ?";
+    //     $stmt = $this->connection->prepare($sql_query);
+    //     $status = $stmt->bind_param(
+    //         "ssssssss",
+    //         $song->title,
+    //         $song->duration,
+    //         $song->release_date,
+    //         $song->lyrics,
+    //         $song->audio_file,
+    //         $song->cover_image,
+    //         $song->canvas_background_image,
+    //         $song->id
+    //     );
+    //     if (!$status) {
+    //         throw new Exception('Binding parameters failed: ' . $stmt->error);
+    //     }
+    //     $status = $stmt->execute();
+    //     if (!$status) {
+    //         throw new Exception('Execution failed: ' . $stmt->error);
+    //     }
+    //     $stmt->close();
+    // }
+
+    /**
+     * Aggiorna un brano esistente
+     */
+    public function updateSong(string $id, string $title, int $duration, string $release_date, string $lyrics, string $audio_file, string $canvas_background_image = ''): void
     {
-        $sql_query = "UPDATE song SET title = ?, duration = ?, release_date = ?, lyrics = ?, audio_file = ?, cover_image = ?, canvas_background_image = ? WHERE id = ?";
+        if (!UUID::checkV4($id)) {
+            throw new Exception('Invalid UUID format');
+        }
+
+        $sql_query = "UPDATE song SET title = ?, duration = ?, release_date = ?, lyrics = ?, audio_file = ?, canvas_background_image = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?";
         $stmt = $this->connection->prepare($sql_query);
-        $status = $stmt->bind_param(
-            "ssssssss",
-            $song->title,
-            $song->duration,
-            $song->release_date,
-            $song->lyrics,
-            $song->audio_file,
-            $song->cover_image,
-            $song->canvas_background_image,
-            $song->id
-        );
-        if (!$status) {
-            throw new Exception('Binding parameters failed: ' . $stmt->error);
+        $stmt->bind_param("sisssss", $title, $duration, $release_date, $lyrics, $audio_file, $canvas_background_image, $id);
+
+        if (!$stmt->execute()) {
+            throw new Exception('Failed to update song: ' . $stmt->error);
         }
-        $status = $stmt->execute();
-        if (!$status) {
-            throw new Exception('Execution failed: ' . $stmt->error);
-        }
-        $stmt->close();
     }
 
     /**

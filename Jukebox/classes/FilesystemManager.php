@@ -90,6 +90,39 @@ class FilesystemManager
         return $success;
     }
 
+    /**
+     * Elimina la copertina di un brano specifico
+     * 
+     * @param string $songId L'identificatore UUID del brano
+     * @return bool True se il file è stato eliminato con successo
+     */
+    public static function deleteSongCover(string $songId): bool
+    {
+        return self::deleteFilesWithPattern(self::SONGS_COVERS_PATH, $songId);
+    }
+
+    /**
+     * Elimina il file audio di un brano specifico
+     * 
+     * @param string $songId L'identificatore UUID del brano
+     * @return bool True se il file è stato eliminato con successo
+     */
+    public static function deleteSongAudio(string $songId): bool
+    {
+        return self::deleteFilesWithPattern(self::SONGS_AUDIO_PATH, $songId);
+    }
+
+    /**
+     * Elimina lo sfondo canvas di un brano specifico
+     * 
+     * @param string $songId L'identificatore UUID del brano
+     * @return bool True se il file è stato eliminato con successo
+     */
+    public static function deleteSongCanvas(string $songId): bool
+    {
+        return self::deleteFilesWithPattern(self::SONGS_CANVAS_PATH, $songId);
+    }
+
     // /**
     //  * Ottiene il nome del file dell'immagine del profilo di un artista
     //  * 
